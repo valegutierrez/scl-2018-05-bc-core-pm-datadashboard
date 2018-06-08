@@ -27,6 +27,7 @@ describe('data', ()=>{
 
       processed.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
+        assert.isAtLeast(user.stats.percent, 0);
         assert.isNumber(user.stats.percent);
         assert.isObject(user.stats.exercises);
         assert.isObject(user.stats.quizzes);
@@ -91,7 +92,6 @@ describe('data', ()=>{
   describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
   });
-
   describe('sortUsers(users, orderBy, orderDirection)', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
