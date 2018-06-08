@@ -1,0 +1,65 @@
+html {
+    background-color: #FFE521;
+}
+#sideBarMenu {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    display: grid;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    background-color: white;
+    border-right: 1px solid #929292;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    max-width: 340px;
+    height: 100%;
+}
+#logo  {
+    padding: 10px;
+    width: 80%;
+}
+h3 {
+    text-align: left;
+    margin: 5px;
+}
+#searchInput {
+    margin: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #929292;
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+}
+#filterBox {
+    grid-row-start: 3;
+    grid-row-end: 8;
+}
+#coursesSelect {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #929292;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+}
+.buttons {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    margin: 5px;
+    padding: 10px;
+    width: 250px;
+    height: 70px;
+    border-radius: 5px;
+    background-color: #FF009E;
+}
+#searchButton {
+    outline: none;
+    border: none;
+    background: none;
+    position: relative;
+    right: 40px;
+}
