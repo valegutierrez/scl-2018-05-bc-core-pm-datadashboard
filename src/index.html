@@ -3,9 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>Data Dashboard</title>
+    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.css">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="sideBarMenu">
+      <center><img id="logo" src="lab-logo2.png"></center>
+      <center>
+        <div id="searchBox">
+          <h3>BUSCAR ALUMNA:</h3>
+          <input id="searchInput" type="text" placeholder="NOMBRE APELLIDO">
+          <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="filterBox">
+          <h3>FILTRAR CURSO:</h3>
+          <select id="coursesSelect">
+            <option value="opt1">LIM-2018-03-PRE-CORE-PW</option>
+            <option value="opt2">SCL-2018-05-BC-CORE-PM</option>
+          </select>
+          <button class="buttons" id="infoButton">INFORMACIÓN GENERAL</button>
+          <button class="buttons" id="lectButton">AVANCE DE LECTURAS</button>
+          <button class="buttons" id="quizButton">PROMEDIO DE QUIZZES</button>
+          <button class="buttons" id="exerButton">AVANCE DE EJERCICIOS</button>
+        </div>
+      </center>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
