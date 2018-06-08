@@ -1,5 +1,4 @@
-describe('data', () => {
-
+describe('data', ()=>{
   it('debería exponer función computeUsersStats en objeto global', () => {
     assert.isFunction(computeUsersStats);
   });
@@ -17,7 +16,6 @@ describe('data', () => {
   });
 
   describe('computeUsersStats(users, progress, courses)', () => {
-
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
@@ -37,7 +35,6 @@ describe('data', () => {
     });
 
     describe('user.stats para el primer usuario en data de prueba - ver carpeta data/', () => {
-
       const processed = computeUsersStats(users, progress, courses);
 
       it(
@@ -69,13 +66,10 @@ describe('data', () => {
           percent: 55,
         });
       });
-
     });
-
   });
 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
-
     it('debería retornar arreglo de usuarios ordenado por nombre ASC');
     it('debería retornar arreglo de usuarios ordenado por nombre DESC');
     it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
@@ -88,19 +82,49 @@ describe('data', () => {
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
-
   });
 
-  describe('filterUsers(users, filterBy)', () => {
-
+  describe('filterUsers(users, filterBy)', ()=>{
     it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
-
   });
 
   describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
-
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
-
   });
 
+  describe('sortUsers(users, orderBy, orderDirection)', () => {
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    it('debería retornar arreglo de usuarios ordenado por nombre ASC', ()=> {
+      const sortedUsers = sortUsers(processed, 'name', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].name.localeCompare[1].name, 0);
+      }
+    });
+    it('debería retornar arreglo de usuarios ordenado por nombre DESC', ()=> {
+      const sortedUsers = sortUsers(processed, 'name', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtLeast(sortedUsers[0].name.localeCompare[1].name, 0);
+      }
+    });
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
+    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
+    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
+    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
+    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
+  });
+
+  describe('filterUsers(users, filterBy)', ()=>{
+    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
+  });
+
+  describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
+    it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
+  });
 });
