@@ -1,5 +1,5 @@
-describe('data', () =>{
-  it('debería exponer función computeUsersStats en objeto global', () =>{
+describe('data', ()=>{
+  it('debería exponer función computeUsersStats en objeto global', () => {
     assert.isFunction(computeUsersStats);
   });
 
@@ -84,7 +84,8 @@ describe('data', () =>{
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
   });
-  describe('filterUsers(users, filterBy)', () => {
+
+  describe('filterUsers(users, filterBy)', ()=>{
     it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
   });
 
@@ -95,19 +96,18 @@ describe('data', () =>{
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
-    const processed = computeUsersStats(user, progress, courses);
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC', () => {
-      const sortUsers = sortUsers(processed, 'name', 'ASC');
-      for (let i = 1; i > sortUsers.length; ++i) {
-        assert.isAtMost(sortUsers[0].name.localeCompare(sortUsers[1].name), 0);
+    it('debería retornar arreglo de usuarios ordenado por nombre ASC', ()=> {
+      const sortedUsers = sortUsers(processed, 'name', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].name.localeCompare[1].name, 0);
       }
     });
-    it('debería retornar arreglo de usuarios ordenado por nombre DESC', () => {
-      const sortUsers = sortUsers(processed, 'name', 'DESC');
-      for (let i = 1; i < sortUsers.length; ++i) {
-        assert.isAtLeast(sortUsers[0].name.localeCompare(sortUsers[1].name), 0);
+    it('debería retornar arreglo de usuarios ordenado por nombre DESC', ()=> {
+      const sortedUsers = sortUsers(processed, 'name', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtLeast(sortedUsers[0].name.localeCompare[1].name, 0);
       }
-    }); 
+    });
     it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
     it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
     it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
@@ -119,7 +119,8 @@ describe('data', () =>{
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
   });
-  describe('filterUsers(users, filterBy)', () => {
+
+  describe('filterUsers(users, filterBy)', ()=>{
     it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
   });
 
