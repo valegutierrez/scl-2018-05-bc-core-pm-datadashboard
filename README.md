@@ -10,46 +10,47 @@ progreso del LMS.
 
 ## 1) Definición del producto
 
-En el `README.md` cuéntanos cómo pensaste y te acercaste a los usuarios al
-desarrollar tu producto (Tip: entrevistas) y cuál fue tu proceso para definir
-el producto final a nivel de experiencia y de interfaz. Es importante que
-detalles:
+1. **Quiénes son los principales usarios de producto:**
 
-* Quiénes son los principales usarios de producto:
-Training Managers de Laboratoria
+  Training Managers de Laboratoria
 
-* Quiénes son los usuarios secundarios del producto:
-El equipo en general de Laboratoria
+2. **Quiénes son los usuarios secundarios del producto:**
 
-* Cuáles son los objetivos de estos usarios en relación con el producto:
-Filtrar datos relevantes (Alumna, cursos, progreso, avance de lectruas, realización ejercicios, promedios, etc.)
-Obtener información para tomar decisiones en cuanto al progreso de las alumnas.
-Obtener información de registro histórico de Laboratoria.
+  El equipo en general de Laboratoria
 
-* Cuáles son los datos más relevantes que el usuario quiere ver en la interfaz y
-  por qué:
-A través de las entrevistas realizadas al equipo de Laboratoria (mencionados en la imagen correspondiente), logramos concluir los siguientes datos:
-Datos Personales (nombre, correo electrónico)
-Avances (lecturas, ejercicios, promedios)
-Promedio de alumnas para dar feedback 
+3. **Cuáles son los objetivos de estos usarios en relación con el producto:**
 
-* Cuándo revisa normalmente estos datos:
-Periodicamente
-Durante evaluaciones
+  - Filtrar datos relevantes (Alumna, cursos, progreso, avance de lectruas, realización ejercicios, promedios, etc.)
+  - Obtener información para tomar decisiones en cuanto al progreso de las alumnas.
+  - Obtener información de registro histórico de Laboratoria.
 
-* Cómo crees que el producto les está resolviendo sus problemas:
-Debido a que los TMs organizan sus datos a través de planillas MS Excel, hubo una problemática al momento de obtener promedios y otros datos relevantes para la toma de decisiones dentro de Laboratoria de manera óptima.
-Por medio de esta interfaz, proponemos una mejora en el acceso a datos de manera rápida, amigable para todo tipo de usuario (con poca o mucha experiencia en programas de modelamiento de datos) y con despliegue en variedad de dispositivos digitales.
+4. **Cuáles son los datos más relevantes que el usuario quiere ver en la interfaz y por qué:**
 
-* Cómo fue tu proceso de diseño:
-Nuestro proceso de diseño fue tomando en consideración las entrevistas realizadas, el manual de diseño corporativo de Laboratoria y lo más importante, las necesidades del cliente final. También incorporamos un poco del diseño base del LMS de Laboratoria para complementar las interfaces.
+  A través de las entrevistas realizadas al equipo de Laboratoria (mencionados en la imagen correspondiente), logramos concluir los siguientes datos:
+  - Datos Personales (nombre, correo electrónico)
+  - Avances (lecturas, ejercicios, promedios)
+  - Promedio de alumnas para dar feedback 
 
-* Cómo los usuarios quieren ver el desplegado de datos:
-Los usuarios y entrevistados mencionaron que a partir del dato que se visualizara, dependería las elecciones de diseño. Por ejemplo, para ver los promedios de las alumnas, además de una tabla general, incluir un gráfico.
+5. **Cuándo revisa normalmente estos datos:**
+
+  - Periodicamente
+  - Durante evaluaciones
+
+6. **Cómo crees que el producto les está resolviendo sus problemas:**
+
+  Debido a que los TMs organizan sus datos a través de planillas MS Excel, hubo una problemática al momento de obtener promedios y otros datos relevantes para la toma de decisiones dentro de Laboratoria de manera óptima.
+
+  Por medio de esta interfaz, proponemos una mejora en el acceso a datos de manera rápida, amigable para todo tipo de usuario (con poca o mucha experiencia en programas de modelamiento de datos) y con despliegue en variedad de dispositivos digitales.
+
+7. **Cómo fue tu proceso de diseño:**
+  Nuestro proceso de diseño fue tomando en consideración las entrevistas realizadas, el manual de diseño corporativo de Laboratoria y lo más importante, las necesidades del cliente final. También incorporamos un poco del diseño base del LMS de Laboratoria para complementar las interfaces.
+
+8. **Cómo los usuarios quieren ver el desplegado de datos:**
+  Los usuarios y entrevistados mencionaron que a partir del dato que se visualizara, dependería las elecciones de diseño. Por ejemplo, para ver los promedios de las alumnas, además de una tabla general, incluir un gráfico.
 
 ## 2) Sketch de la solución (prototipo de baja fidelidad)
 
-Sketch de prototipo inicial.
+![Sketch de prototipo inicial](src/sketch.jpg)
 
 ## 3) Diseño de la Interfaz de Usuario
 
