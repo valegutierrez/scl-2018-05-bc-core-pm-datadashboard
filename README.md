@@ -1,5 +1,59 @@
 # Data Dashboard
 
+En Laboratoria, las Training Managers (TMs) hacen un gran trabajo al analizar la
+mayor cantidad de datos posibles respecto al progreso de las estudiantes para
+apoyarlas en su aprendizaje.
+
+Es por este motivo que se nos ha solicitado crear una interfaz donde puedan acceder a 
+información vital para la toma de decisiones, donde podrán _ver_ y _usar_ la data de 
+progreso del LMS.
+
+## 1) Definición del producto
+
+En el `README.md` cuéntanos cómo pensaste y te acercaste a los usuarios al
+desarrollar tu producto (Tip: entrevistas) y cuál fue tu proceso para definir
+el producto final a nivel de experiencia y de interfaz. Es importante que
+detalles:
+
+* Quiénes son los principales usarios de producto.
+- Training Managers de Laboratoria
+- Los Coach
+
+* Cuáles son los objetivos de estos usarios en relación con el producto.
+- Filtrar datos relevantes (Alumna, cursos, progreso, avance de lectruas, realización ejercicios, promedios, etc.)
+- Poder obtener información para tomar desiciones en cuanto al progreso de las alumnas.
+
+* Cuáles son los datos más relevantes que el usuario quiere ver en la interfaz y
+  por qué. Cómo los descubriste.
+
+* Cuándo revisa normalmente estos datos.
+- Periodicamente.
+
+* Cómo crees que el producto les está resolviendo sus problemas.
+
+* Cómo fue tu proceso de diseño.
+
+## 2) Sketch de la solución (prototipo de baja fidelidad)
+
+Sketch de prototipo inicial.
+
+## 3) Diseño de la Interfaz de Usuario
+
+Realizado en Fixma
+
+[Figma](https://www.figma.com/file/efGrl4wyvcwzetbAkejH1sCL/Data-Dashboard) 
+
+El diseño fue basado en la plataforma del LMS, conservando diagramación y jerarquía.
+Se utiliza nueva paleta de colores y Logotipo de Laboratoria.
+
+## 3) Organización de tareas a Desarrollar
+
+[Trello](https://trello.com/b/hv3BOMJr/data-dashboard) 
+
+...............................................................................
+
+# Data Dashboard
+
 ## Preámbulo
 
 En Laboratoria, las Training Managers (TMs) hacen un gran trabajo al analizar la

@@ -1,5 +1,7 @@
 global.window = global;
 global.assert = require('chai').assert;
+global.assert = require('chai').expect;
+global.assert = require('chai').should;
 global.fixtures = {
   cohorts: require('../data/cohorts.json'),
   progress: require('../data/cohorts/lim-2018-03-pre-core-pw/progress.json'),

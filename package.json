@@ -18,5 +18,13 @@
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
     "opener": "^1.4.3"
-  }
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0"
+  },
+  "eslintIgnore": ["test/fixtures.js"]
 }
