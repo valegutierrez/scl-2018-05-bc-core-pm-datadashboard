@@ -10,10 +10,13 @@
     <div id="sideBarMenu">
       <center><img id="logo" src="lab-logo2.png"></center>
       <center>
+        <button id="menuBtn1"><i class="fas fa-bars"></i></button>
         <div id="searchBox">
           <h3>BUSCAR ALUMNA:</h3>
-          <input id="searchInput" type="text" placeholder="NOMBRE APELLIDO">
-          <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+          <div id="searchWithIcon">
+            <input id="searchInput" type="text" placeholder="NOMBRE APELLIDO">
+            <button type="submit" id="searchButton"><i class="fa fa-search"></i></button>
+          </div>
         </div>
         <div id="filterBox">
           <h3>FILTRAR CURSO:</h3>
@@ -28,6 +31,12 @@
         </div>
       </center>
     </div>
+    <div class="indexPage">
+      <button id="menuBtn2"><i class="fas fa-bars"></i></button>
+      <img id="logo" src="lab-logo.png">
+      <h1>Data Dashboard</h1>
+    </div>
     <script src="main.js"></script>
+    <script src="data.js"></script>
   </body>
 </html>
