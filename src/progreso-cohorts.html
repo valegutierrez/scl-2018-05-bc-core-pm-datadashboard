@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Progreso de Cohorts</title>
+    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.css">
+    <link rel="stylesheet" href="promedios.css" />
+  </head>
+  <body>
+    <div id="container">
+        <div id="sideBarMenu">
+        <center class="logoLine"><img id="logo" src="lab-logo2.png"></center>
+        <center>
+            <div id="searchBox">
+            </div>
+            <div id="filterBox">
+              <h3>BUSCAR ALUMNA:</h3> 
+              <input id="searchInput" type="text" placeholder="NOMBRE APELLIDO">
+              <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>                
+              <h3>FILTRAR CURSO:</h3>
+              <select id="coursesSelect">
+                <option value="opt1">LIM-2018-03-PRE-CORE-PW</option>
+                <option value="opt2">SCL-2018-05-BC-CORE-PM</option>
+              </select>   
+              <button class="buttons" id="infoButton">INFORMACIÓN GENERAL</button>
+              <button class="buttons" id="lectButton">AVANCE DE LECTURAS</button>
+              <button class="buttons" id="quizButton" onclick="window.location.href='promedios.html'" >PROMEDIO DE QUIZZES</button>
+              <button class="buttons" id="exerButton">AVANCE DE EJERCICIOS</button>
+              <button class="buttons" id="progButton"onclick="window.location.href='progreso-cohorts.html'" >PROGRESO DE COHORTS</button>
+            </div>
+        </center>
+        </div>
+        <div id="sideBody">
+          <div id="header">
+              <div><h1 id="titles">PROGRESO DE COHORTS</h1></div>
+              <div><h4>LIM-2018-03-PRE-CORE-PW</h4s></div>
+          </div> 
+          </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
