@@ -1,42 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.css">
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="sideBarMenu">
-      <center><img id="logo" src="lab-logo2.png"></center>
-      <center>
-        <button id="menuBtn1"><i class="fas fa-bars"></i></button>
-        <div id="searchBox">
-          <h3>BUSCAR ALUMNA:</h3>
-          <div id="searchWithIcon">
-            <input id="searchInput" type="text" placeholder="NOMBRE APELLIDO">
-            <button type="submit" id="searchButton"><i class="fa fa-search"></i></button>
-          </div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Dashboard Laboratoria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="bootstrap-4.1.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0" id="navbarPage">
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 d-none d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <a class="nav-link border-bottom pageLogo" href="#">
+                        <img class="labLogo" src="img/lab-logo2.png">
+                    </a>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                <span class="text-uppercase">Buscar Alumna :</span>
+                            </h6>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="NOMBRE APELLIDO" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                  <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                                </div>
+                        </li>
+                    </ul>
+                    <ul class="nav flex-columm">
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span class="text-uppercase">Filtrar Cohorts :</span>
+                        </h6>
+                        <div class="btn-group-vertical w-100">
+                            <button class="btn btn-primary btnlab text-uppercase active">
+                                Información General
+                            </button>
+                            <button class="btn btn-primary btnlab text-uppercase active">
+                                Avance de Lecturas
+                            </button>
+                            <button class="btn btn-primary btnlab text-uppercase active">
+                                Promedio de Quizzes
+                            </button>
+                            <button class="btn btn-primary btnlab text-uppercase active">
+                                Avance de Ejercicios
+                            </button>
+                            <button class="btn btn-primary btnlab text-uppercase active">
+                                Avance de Lecturas
+                            </button>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        <div id="filterBox">
-          <h3>FILTRAR CURSO:</h3>
-          <select id="coursesSelect">
-            <option value="opt1">LIM-2018-03-PRE-CORE-PW</option>
-            <option value="opt2">SCL-2018-05-BC-CORE-PM</option>
-          </select>
-          <button class="buttons" id="infoButton">INFORMACIÓN GENERAL</button>
-          <button class="buttons" id="lectButton">AVANCE DE LECTURAS</button>
-          <button class="buttons" id="quizButton">PROMEDIO DE QUIZZES</button>
-          <button class="buttons" id="exerButton">AVANCE DE EJERCICIOS</button>
+    </div>
+    <main class="col-md-9 ml-sm-auto col-lg-13">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <h1 class="h2 text-uppercase">Dashboard</h1>
+            <div class="dropdown show">
+                <a class="btn btn-light btnlab dropdown-toggle text-uppercase" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Cohorts
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">LIM-2018-03-PRE-CORE-PW</a>
+                  <a class="dropdown-item" href="#">SCL-2018-05-BC-CORE-PM</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
         </div>
-      </center>
-    </div>
-    <div class="indexPage">
-      <button id="menuBtn2"><i class="fas fa-bars"></i></button>
-      <img id="logo" src="lab-logo.png">
-      <h1>Data Dashboard</h1>
-    </div>
-    <script src="main.js"></script>
-    <script src="data.js"></script>
-  </body>
+    </main>
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+</body>
 </html>
