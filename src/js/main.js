@@ -2,34 +2,24 @@ const lecTable = document.getElementById('infoLectureTable');
 const btnLecture = document.getElementById('lectures');
 const lectureProgress = dataUsers => {
   btnLecture.addEventListener('click', () => {
-    const renderUsers = dataUsers.forEach(element => {
-      let student = `<tr><td>${element.name}</td><td></td><td></td><td></td><td></td></tr>`;
-      return lecTable.innerHTML += student;
+    const filterStudents = dataUsers.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
+    const renderUsers = filterStudents.forEach(element => {
+      let names = `<tr><td>${element.name}</td><td></td><td></td><td></td><td></td></tr>`;
+      return lecTable.innerHTML += names;
     });
+    tableAppear();
     return renderUsers;
   });
 };
 
-const inputUser = document.getElementById('userFinder');
-const findUser = dataUsers => {
-  inputUser.addEventListener('input', () => {
-    let listCont = inputUser.value;
-    closeAllLists();
-    listCont = document.createElement('div');
-    listCont.setAttribute('id', this.id + 'autocomplete-list');
-    listCont.setAttribute('class', 'auto-items');
-    inputUser.parentNode.appendChild(listCont);
-  });
+const tableAppear = () => {
+  document.getElementById('lectureProgressPage').style.display = 'block';
 };
 
-function closeAllLists(element) {
-  let x = document.getElementsByClassName('auto-items');
-  for (var i = 0; i < x.length; i++) {
-    if (element !== x[i] && element !== inputUser) {
-      x[i].parentNode.removeChild(x[i]);
-    }
-  }
+function findUser(dataUsers) {
+  /* Autocompleta el input con los nombres de las estudiantes */
 }
+
 
 function printLectures() {
   /* imprime la data del array dentro de la tabla */ 
