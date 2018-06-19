@@ -1,0 +1,219 @@
+
+body{
+    margin: 0;
+    /*font-size: 10px !important;*/
+}
+#container{
+    background-color: white;
+    display: grid;
+    grid-template-columns: 300px auto ;
+    padding: 0;
+    margin: 0;
+}
+#sideBody{
+    display: grid;
+    grid-template-rows: 83.5px auto;
+    padding: 0;
+    margin: 0;
+}
+#header{
+    display: grid;
+    grid-template-columns: auto auto ;
+    max-height: 82.16px;
+    background-color: #FFE521;
+}
+#header div{
+    display: grid;
+}
+#header h1{
+    margin-top: 9px;
+    margin-left: 27px;
+}
+#header h4{
+    text-align: right;
+    margin-top: 26px;
+    margin-right: 20px;
+}
+#titles{
+    align-content: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+}
+#sideBarMenu {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    display: grid;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    background-color: white;
+    border-right: 1px solid #929292;
+    /*position: fixed;*/
+    top: 0%;
+    left: 0%;
+    max-width: 300px;
+    height: 100%;
+}
+#logo  {
+    padding: 10px;
+    width: 80%;
+    margin-top: 5px;
+}
+.logoLine{
+    border-bottom: 1px solid gray;
+}
+h3 {
+    text-align: left;
+    margin: 5px;
+    margin-top: 28px;
+    margin-left: 50px;
+}
+#searchInput {
+    /*margin: 5px;*/
+    margin-left: 32px;
+    /*align-content: center;*/
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #929292;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+#searchButton {
+    outline: none;
+    border: none;
+    background: none;
+    position: relative;
+    right: 40px;
+}
+#coursesSelect {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #929292;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.grid-container {
+    display: grid;
+    grid-template-rows: 5% auto 10% 20%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.grid-container>div {
+    text-align: center;
+    font-size: 10px;
+}
+.grid-data-header {
+    display: grid;
+    grid-template-columns: 28% 21% 16% 16% 16% 30px;
+    grid-template-rows: auto auto;
+    grid-gap: 1px;
+    max-height: 150px;
+    background-color: #000000;
+    padding: 1px;
+}
+.grid-data-header .header{
+    background-color: rgba(255, 255, 0,255);
+    text-align: center;
+    font-weight:bold;
+    padding:0px 0;
+    font-size: 18px !important;
+}
+.grid-data {
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: 28% 21% 17% 17% 17%;
+    grid-template-rows: auto auto;
+    grid-gap: 1px;
+    max-height: 150px;
+    background-color: #000000;
+    padding: 1px;
+  }
+.grid-data>div {
+    background-color: rgba(255, 255, 255, 255);
+    text-align: center;
+    padding:0px 0;
+    font-size: 18px !important;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 0px;
+    background-color: #fff;
+    color: #000;
+    height:250px;
+    overflow:auto;
+    margin-top: 20px;
+}
+.box {
+    background-color: #fff;
+    color: #000;
+    font-size: 18px;
+    border: solid 0.5px black;
+}
+.head {
+    position:sticky;
+    top:0;
+    background:yellow;
+    font-size:18px
+}
+
+.buttons {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 15px;
+    margin: 2px;
+    padding: 10px;
+    width: 200px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #FF009E;
+}
+#optionFilterMm{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #929292;
+    width: 210px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-left: -12px;
+}
+.filterOpcion{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    display: grid;
+    grid-template-columns: 28% auto auto auto auto 15px;
+}
+#filterOptimo{
+    margin-top: 15px;
+}
+#filterNoptimo{
+    margin-top: 15px;
+}
+#filterSnAvance{
+    margin-top: 15px;
+}
+#colorDiv{
+    background-color: #FF009E;
+}
+::-webkit-scrollbar-track {
+    background-color: blue;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 0, 0, 0.2);
+} 
+::-webkit-scrollbar-button{
+    background-color: navy;
+}
+::-webkit-scrollbar-corner{
+    background-color: black;
+}
+
