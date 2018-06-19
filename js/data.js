@@ -1,5 +1,6 @@
 const usersJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/users';
 const cohortsJson = 'https://api.laboratoria.la/cohorts';
+const progressJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/progress';
 
 fetch(usersJson)
   .then(response => response.json())
@@ -12,6 +13,12 @@ fetch(cohortsJson)
   .then(response => response.json())
   .then(dataCohorts => {
     getCohorts(dataCohorts);
+  });
+
+fetch(progressJson)
+  .then(response => response.json())
+  .then(dataCohorts => {
+    console.log(dataCohorts);
   });
 
 const getCohorts = dataCohorts => {
