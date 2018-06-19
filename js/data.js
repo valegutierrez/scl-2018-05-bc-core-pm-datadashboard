@@ -1,5 +1,5 @@
-const usersJson = 'data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const cohortsJson = 'data/cohorts.json';
+const usersJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/users';
+const cohortsJson = 'https://api.laboratoria.la/cohorts';
 
 fetch(usersJson)
   .then(response => response.json())
