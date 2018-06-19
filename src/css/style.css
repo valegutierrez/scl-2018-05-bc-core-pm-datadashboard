@@ -1,5 +1,8 @@
-html {
-    background-color: #FFE521;
+.yellowlab {
+    background-color: #FFE521!important;
+}
+.fuschialab {
+    background-color: #FF009E!important;
 }
 .sidebar {
     background-color: white;
@@ -11,7 +14,7 @@ html {
     z-index: 100;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
-.pageLogo {
+.pageLogo { /* caja contenedora del logo */
     height: 4.5em;
 }
 .labLogo {
@@ -19,20 +22,29 @@ html {
     padding-bottom: .5rem!important;
     max-width: 100%;
 }
-.fa-search { 
-
-}
 #navbarPage {
     background-color: #FFE521!important;
     height: 4.5em;
     z-index: -1;
-}
-.navbar-brand {
-    position: fixed;
 }
 .btnlab {
     border-radius: 5px;
     background-color: #FF009E!important;
     border-color: transparent!important;
     color: white!important;
+    margin-bottom: .5em;
+}
+#lectureProgressPage {
+    max-height: 400px;
+    overflow: auto;
+}
+#cohortsList {
+    height: 200px;
+    overflow: auto;
+}
+.auto-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
 }
