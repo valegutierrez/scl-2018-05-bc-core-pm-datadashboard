@@ -25,7 +25,7 @@
 #navbarPage {
     background-color: #FFE521!important;
     height: 4.5em;
-    z-index: -1;
+    z-index: 10;
 }
 .btnlab {
     border-radius: 5px;
@@ -61,9 +61,9 @@
     /*overflow: auto;*/
 }
 
+
 .infoTable{
     max-height: 400px;
-    overflow: auto;
 }
 
 .infoTable th{
@@ -72,4 +72,12 @@
 
 .spaceContent{
     padding-right: 0.5em;
+}
+
+#bodyContent{
+    padding-top: 2.2em !important;
+    overflow: auto;
+}
+#generalInfoTable{
+    /*overflow-y: auto;*/
 }

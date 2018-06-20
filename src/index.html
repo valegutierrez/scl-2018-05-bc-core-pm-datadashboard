@@ -11,6 +11,10 @@
 </head>
 <body>
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0" id="navbarPage">
+      <div id="titleContainer" class="col-md-9 offset-md-3">
+          <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
+      </div>
+        
     </nav>
     <div class="container-fluid">
         <div class="row">
@@ -45,7 +49,7 @@
                             <span class="text-uppercase">Filtrar Cohorts :</span>
                         </h6>
                         <div class="btn-group-vertical w-100">
-                            <button class="btn btn-primary btnlab text-uppercase active" onclick="generalInformation()">
+                            <button id="generalInfo" class="btn btn-primary btnlab text-uppercase active" onclick="generalInformation()">
                                 Información General
                             </button>
                             <button id="lectures" class="btn btn-primary btnlab text-uppercase active">
@@ -65,12 +69,14 @@
                 </div>
             </nav>
         </div>
-    </div>
+      </div>
     <main class="col-md-9 ml-sm-auto col-lg-13">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+      <!--
         <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
+      -->
       </div>
-      <div id="bodyContent">
+      <div id="bodyContent" class="container-fluid">
       <!-- inicio Lectura en progreso-->
         <div id="lectureProgressPage">
           <table id="lectureTable" class="table table-striped table-fixed">
@@ -86,10 +92,10 @@
             <tbody id="infoLectureTable">
             </tbody>
           </table>
-      </div>
+        </div>
       <!--fin lectura en progreso-->
       <!--inicio informacion general-->
-      <div id="generalInformation">
+        <div id="generalInformation">
           <div class="container">
               <div class="row">
                   <table  class="table table-striped table-fixed ">
@@ -112,7 +118,7 @@
                   </table>
               </div>
               <div class="row">
-                <table class="table table-striped table-fixed infoTable">
+                <table id="generalInfoTable" class="table table-striped table-fixed ">
                   <thead>
                     <tr class="yellowlab text-uppercase"></tr>
                       <th scope="col" class="fuschialab">NOMBRE</th>
@@ -121,8 +127,31 @@
                       <th scope="col" class="yellowlab">% LECTURA</th>
                     </tr>
                   </thead>
-                  <tbody>
-
+                  <tbody id="generalInfBody">
+                      <tr>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                      </tr>
+                      <tr>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                      </tr>
+                      <tr>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                      </tr>
+                      <tr>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                        <td>&#160;</td>
+                      </tr>
                   </tbody>
                 </table>
               </div>
@@ -172,6 +201,7 @@
       <!--fin informacion general-->
       </div>
     </main>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
