@@ -1,5 +1,6 @@
 const lecTable = document.getElementById('infoLectureTable');
 const btnLecture = document.getElementById('lectures');
+
 const lectureProgress = dataUsers => {
   btnLecture.addEventListener('click', () => {
     const filterStudents = dataUsers.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
@@ -37,10 +38,19 @@ function printExercises() {
 }
 //Se llama al momento de hacer click en el menú información general
 function generalInformation() {
+  document.getElementById('generalInfBody').innerHTML = '';
+  fetch(usersJson)
+    .then(response => response.json())
+    .then(dataUsers => {
+      const filterStudents = dataUsers.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
+      const renderUsers = filterStudents.forEach(element => {
+        let names = `<tr><td>${element.name}</td><td></td><td></td><td></td></tr>`;
+        document.getElementById('generalInfBody').innerHTML += names;
+      });
+    });
   changeTitle('INFORMACIÓN GENERAL');//Cambia el titulo por información general
   hideContent();//Esconde todos los contenidos
   document.getElementById('generalInformation').style.display = 'block';//muestra el contenido información general
-
 }
 //Cambia el titulo del dashboard
 function changeTitle(titleText) {
