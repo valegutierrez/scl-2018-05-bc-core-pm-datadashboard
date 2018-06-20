@@ -13,7 +13,9 @@ const lectureProgress = dataUsers => {
 };
 
 const tableAppear = () => {
-  document.getElementById('lectureProgressPage').style.display = 'block';
+  changeTitle('AVANCE DE LECTURAS');//Cambia el titulo
+  hideContent();//Esconde todos los contenidos
+  document.getElementById('lectureProgressPage').style.display = 'block';//Muestra el contenido avance de lectura
 };
 
 function findUser(dataUsers) {
@@ -32,4 +34,21 @@ function exerciseProgress() {
 
 function printExercises() {
   /* imprime la data del array dentro de la tabla */ 
+}
+//Se llama al momento de hacer click en el menú información general
+function generalInformation() {
+  changeTitle('INFORMACIÓN GENERAL');//Cambia el titulo por información general
+  hideContent();//Esconde todos los contenidos
+  document.getElementById('generalInformation').style.display = 'block';//muestra el contenido información general
+
+}
+//Cambia el titulo del dashboard
+function changeTitle(titleText) {
+  document.getElementById('titleDashboard').innerText = titleText;
+}
+function hideContent() {
+  const bodyContentChild = document.getElementById('bodyContent').children;
+  for (let i = 0;i < bodyContentChild.length;i++) {
+    bodyContentChild[i].style.display = 'none';
+  }   
 }
