@@ -5,26 +5,26 @@ const progressJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/
 fetch(usersJson)
   .then(response => response.json())
   .then(dataUsers => {
-    lectureProgress(dataUsers);
-    findUser(dataUsers);
+    lectureProgress(users);
+    findUser(users);
   });
 
 fetch(cohortsJson)
   .then(response => response.json())
-  .then(dataCohorts => {
-    getCohorts(dataCohorts);
+  .then(cohorts => {
+    getCohorts(cohorts);
   });
 
 fetch(progressJson)
   .then(response => response.json())
-  .then(dataCohorts => {
-    console.log(dataCohorts);
+  .then(progress => {
+    console.log(progress);
   });
 
-const getCohorts = dataCohorts => {
-  const renderCohorts = dataCohorts.forEach(element => {
-    let cohort = `<a class="dropdown-item" href="#">${element.id}</href>`;
-    return cohortsList.innerHTML += cohort;
+const getCohorts = cohorts => {
+  const renderCohorts = cohorts.forEach(element => {
+    let cohortelement = `<a class="dropdown-item" href="#">${element.id}</href>`;
+    return cohortsList.innerHTML += cohortelement;
   });
-  return renderCohorts;
+  return rendercohorts;
 };
