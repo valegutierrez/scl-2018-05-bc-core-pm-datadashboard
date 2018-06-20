@@ -39,6 +39,11 @@
     max-height: 400px;
     overflow: auto;
 }
+
+#lectureProgressPage th{
+    width: 20%;
+}
+
 #cohortsList {
     height: 200px;
     overflow: auto;
@@ -48,4 +53,23 @@
     top: 100%;
     left: 0;
     right: 0;
+}
+
+#generalInformation {
+    display: none;
+    /*max-height: 400px;*/
+    /*overflow: auto;*/
+}
+
+.infoTable{
+    max-height: 400px;
+    overflow: auto;
+}
+
+.infoTable th{
+    width: 25%;
+}
+
+.spaceContent{
+    padding-right: 0.5em;
 }
