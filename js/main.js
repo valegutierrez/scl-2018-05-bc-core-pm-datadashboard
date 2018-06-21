@@ -13,7 +13,7 @@ const generalInformation = usersData => {
     });
     changeTitle('INFORMACIÓN GENERAL');
     hideContent();
-    document.getElementById('generalInformation').style.display = 'block';
+    infTable.style.display = 'block';
   });
 };
 // Se llama al momento de hacer click en el botón Avance de Lecturas
@@ -26,7 +26,7 @@ const lectureProgress = usersData => {
     });
     changeTitle('AVANCE DE LECTURAS');// Cambia el titulo por información general
     hideContent();// Esconde todos los contenidos
-    document.getElementById('lectureProgressPage').style.display = 'block';// Muestra el contenido información general
+    lecTable.style.display = 'block';// Muestra el contenido información general
   });
 };
 
