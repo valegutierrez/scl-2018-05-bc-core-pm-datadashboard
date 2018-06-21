@@ -17,17 +17,14 @@ function start() {
     const cohorts = responseJsons[3];
     // Ejecuta las funciones que se despliegan en el html.
     lectureProgress(users);
-    findUser(users);
     generalInformation(users);
-
     if (users && progress && courses) {
       computeUserStats(users, progress, courses);
     }
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
       console.log('Error al llamar API.' + error);
-    }
-  );
+    });
 }
 function computeUserStats(users, progress, courses) {
   console.log('Entraron los Datos en computeUserStats');
