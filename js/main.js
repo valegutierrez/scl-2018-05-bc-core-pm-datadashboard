@@ -40,14 +40,6 @@ function lectureProgress(users) {
   });
 };
 
-function getCohorts(cohorts) {
-  const renderCohorts = cohorts.forEach(element => {
-    let cohortElement = `<a class="dropdown-item" href="#">${element.id}</href>`;
-    return cohortsList.innerHTML += cohortElement;
-  });
-  return renderCohorts;
-};
-
 function printLectures() {
   /* imprime la data del array dentro de la tabla */ 
 }
@@ -71,7 +63,9 @@ function hideContent() {
     bodyContentChild[i].style.display = 'none';
   }   
 };
-
-function ComputeUserStats(users, progress, courses) {
-
+// Se ejecuta al momento de seleccionar un cohort, obteniendo los datos del cohort seleccionado desde la API
+function cohortsSelectChange(cohortId) {
+  getApiData(cohortId);
 }
+
+

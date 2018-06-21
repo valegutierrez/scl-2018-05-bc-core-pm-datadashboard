@@ -1,56 +1,22 @@
-const usersJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/users';
+const usersJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-am/users'; //Pendiente futuro uso
 const cohortsJson = 'https://api.laboratoria.la/cohorts';
-const progressJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/progress';
-//testData
-let Progress = {};
-function start() {
-  Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
-    fetch('https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/users'),
-    fetch('https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/progress'),
-    fetch('https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/courses'),
-    fetch('https://api.laboratoria.la/cohorts')
-  ]).then((responses)=>{ // Se cumplen promesas
-    return Promise.all(responses.map((response => response.json()))); 
-  }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
-    const users = responseJsons[0].filter(element => element.role === 'student');
-    const progress = responseJsons[1];
-    const courses = responseJsons[2];
-    const cohorts = responseJsons[3];
-    // Ejecuta las funciones que se despliegan en el html.
-    lectureProgress(users);
-    generalInformation(users);
-    if (users && progress && courses) {
-      computeUserStats(users, progress, courses);
-    }
-  }).catch(
-    (error)=>{ // Si una llamada falla se ejecuta error.
-      console.log('Error al llamar API.' + error);
-    });
+const progressJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-am/progress';//Pendiente de uso
+function start() { // Pendiente de uso, de momento.
+  getApiData('scl-2018-05-bc-core-am');
 }
 function computeUserStats(users, progress, courses) {
-  console.log('Entraron los Datos en computeUserStats');
-  console.log(users[0]);
-  Progress = progress['axUVrtJBsWgK8aqCcAh4qN8z69N2'];//users[0].id];
-
-
   users.forEach(element => {
-    let Progress = progress[element.id];
-    console.log('Alumna:' + element.name);
-// Empieza lógica 
-    let porcentajetotal = 0;
-    for (var Pkey in Progress) {
-      console.log('unidad=' + Pkey);
-      for (var UKey in Progress[Pkey]) {
-        if (UKey === 'percent') {
-        //console.log(' name=' + UKey + ' value=' + Progress[Pkey][UKey]);
-          porcentajetotal += parseInt(Progress[Pkey][UKey]);
+    let Progress = progress[element.id]; //Obtiene progreso por usuario
+    let porcentajetotal = 0; // Inicializa el acumulador de porcentaje
+    for (var Pkey in Progress) { //Recorre los cursos
+      for (var UKey in Progress[Pkey]) { //Recorre las unidades
+        if (UKey === 'percent') { 
+          porcentajetotal += parseInt(Progress[Pkey][UKey]); //Selecciona el poorcentaje de unidad
         }
         if (UKey === 'units') {
-          for (var uniKey in Progress[Pkey][UKey]) {
-            console.log('\t\tUnidad=' + uniKey );
+          for (var uniKey in Progress[Pkey][UKey]) { // Obtiene todas las unidades
             for (var xKey in Progress[Pkey][UKey][uniKey]) {
-              if (xKey === 'parts') {
-                //console.log('\t\t\t\tname=' + xKey + ' value=' + Progress[Pkey][UKey][uniKey][xKey]);
+              if (xKey === 'parts') { // Obtiene el objeto de "Parts"
                 let countPart = 0;
                 let totalRead = 0;
                 let totalQuiz = 0;
@@ -61,51 +27,93 @@ function computeUserStats(users, progress, courses) {
                 let totalScoreQuiz = 0;
                 let scoreSumQuiz = 0;
                 let scoreAvgQuiz = 0;
-                for (partKey in Progress[Pkey][UKey][uniKey][xKey]) {
-                  //console.log('\t\t\t\t\t\tname=' + partKey + ' value=' + Progress[Pkey][UKey][uniKey][xKey][partKey]);
-                //console.log('\t\t\t\t\t\t\t\tType=' + Progress[Pkey][UKey][uniKey][xKey][partKey].type)
-                //console.log('\t\t\t\t\t\t\t\tComplete=' + Progress[Pkey][UKey][uniKey][xKey][partKey].completed)
-                  switch (Progress[Pkey][UKey][uniKey][xKey][partKey].type) {
+                for (partKey in Progress[Pkey][UKey][uniKey][xKey]) { // Recorre las "Parts"
+                  switch (Progress[Pkey][UKey][uniKey][xKey][partKey].type) { // Elije tipo de parte
                   case 'read':
-                    totalRead++;
+                    totalRead++; // Sumas una lectura al total
                     if (Progress[Pkey][UKey][uniKey][xKey][partKey].completed === 1)
-                      totalReadOk++;
+                      totalReadOk++; // Suma una lectura completada
                     break;
                   case 'quiz':
                     totalQuiz++;
                     if (Progress[Pkey][UKey][uniKey][xKey][partKey].completed === 1) {
                       totalQuizOk++;						
-                      scoreSumQuiz += parseInt(Progress[Pkey][UKey][uniKey][xKey][partKey].score);
+                      scoreSumQuiz += parseInt(Progress[Pkey][UKey][uniKey][xKey][partKey].score);// Obtiene puntajes de Quizze
                     }
-                      
                     break;
                   case 'workshop':
-                    totalWorkshop++;
+                    totalWorkshop++;// Suma un workshop al total
                     if (Progress[Pkey][UKey][uniKey][xKey][partKey].completed === 1)
-                      totalWorkshopOK++;						
+                      totalWorkshopOK++;// Suma uno a los completados				
                     break;
                   }
                 }
-                console.log('Totales     ' + totalRead + ' reads,' + totalQuiz + ' quiz,' + totalWorkshop + ' workshop.'); 
-                console.log('Completados ' + totalReadOk + ' reads,' + totalQuizOk + ' quiz,' + totalWorkshopOK + ' workshop.'); 
-                console.log('Porcentajes ' + ((totalReadOk * 100) / totalRead) + '% reads,'
-                                      + ((totalQuizOk * 100) / totalQuiz) + '% quiz,' 
-                                  + ((totalWorkshopOK * 100) / totalWorkshop) + '% workshop.'); 
-                console.log('total    score quiz :' + scoreSumQuiz); 
-                console.log('promedio score quiz :' + (scoreSumQuiz / totalQuizOk)); 
+                let stats = { // Arma la nueva propiedad para el objeto Users
+                  percent: (scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk)),
+                  exercises: {
+                    total: totalWorkshop,
+                    completed: totalWorkshopOK,
+                    percent: ((totalWorkshopOK * 100) / (totalWorkshop === 0 ? 1 : totalWorkshop)) // Cambia los ceros por 1, para evitar division por 0
+                  },
+                  reads: {
+                    total: totalRead,
+                    completed: totalReadOk,
+                    percent: ((totalReadOk * 100) / (totalRead === 0 ? 1 : totalRead))
+                  },
+                  quizzes: {
+                    total: totalRead,
+                    completed: totalReadOk,
+                    percent: ((totalReadOk * 100) / (totalRead === 0 ? 1 : totalRead)),
+                    scoreSum: scoreSumQuiz,
+                    scoreAvg: (scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
+                  }
+                };
+                element['stats'] = stats;// Agrega la nueva propiedad al Users
               }  
             }
           }
         }
       }
-      console.log('***********');
     }
-    console.log('porcentaje :' + (porcentajetotal / 8) + '%');
-// Termina lógica
   });
   console.log(users);
   console.log(progress);
   console.log(courses);
 }
 
-start();
+function getApiData(cohort) {
+  Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses')
+  ]).then((responses)=>{ // Se cumplen promesas
+    return Promise.all(responses.map((response => response.json()))); 
+  }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
+    const users = responseJsons[0].filter(element => element.role === 'student');
+    const progress = responseJsons[1];
+    const courses = responseJsons[2];
+    // Ejecuta las funciones que se despliegan en el html.
+    lectureProgress(users);
+    generalInformation(users);
+    if (users && progress && courses) {
+      computeUserStats(users, progress, courses);//Llama al computerUserStats con datos obtenidos de la API
+    }
+  }).catch(
+    (error)=>{ // Si una llamada falla se ejecuta error.
+      console.log('Error al llamar API.' + error);
+    });
+}
+
+function getCohorts(cohorts) { // Arma el contenido del desplejable de cohorts.
+  const renderCohorts = cohorts.forEach(element => {
+    let cohortElement = `<a class="dropdown-item" href="javascript:cohortsSelectChange('${element.id}');">${element.id}</href>`;
+    return cohortsList.innerHTML += cohortElement;
+  });
+  return renderCohorts;
+};
+
+fetch(cohortsJson) 
+  .then(response => response.json())
+  .then(cohortsData => {
+    getCohorts(cohortsData);
+  });
