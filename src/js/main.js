@@ -16,8 +16,7 @@ const inpStudent = document.getElementById('userFinder');
 // Se llama al momento de hacer click en el botón Información General
 function generalInformation(users) {
   btnInformation.addEventListener('click', () => {
-    const filterStudents = users.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
-    const renderUsers = filterStudents.forEach(element => {
+    const renderUsers = users.forEach(element => {
       let names = `<tr><td>${element.name}</td><td></td><td></td><td></td></tr>`;
       return infTable.innerHTML += names;
     });
@@ -29,9 +28,8 @@ function generalInformation(users) {
 // Se llama al momento de hacer click en el botón Avance de Lecturas
 function lectureProgress(users) {
   btnLecture.addEventListener('click', () => {
-    const filterStudents = users.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
-    const renderUsers = filterStudents.forEach(element => {
-      let names = `<tr><td>${element.name}</td><td></td><td></td><td></td><td></td></tr>`;
+    const renderUsers = users.forEach(element => {
+      let names = `<tr><td>${element.name}</td><td>${element.stats.reads.percent}%</td><td></td><td></td><td></td></tr>`;
       return lecTable.innerHTML += names;
     });
     changeTitle('AVANCE DE LECTURAS');// Cambia el titulo por información general

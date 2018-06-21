@@ -39,7 +39,7 @@
     max-height: 400px;
     overflow: auto;
 }
-.row-margin {
+.row-margin { /* Agrega espaciado arriba a un row nuevo */
     margin-top: 1em;
 }
 
