@@ -84,8 +84,6 @@
               <tr class="yellowlab text-uppercase">
                 <th scope="col">Nombre</th>
                 <th class="fuschialab" scope="col">Avance Lecturas</th>
-                <th scope="col">Promedio Quizzes</th>
-                <th scope="col">Avance Ejercicios</th>
               </tr>
             </thead>
             <tbody id="infoLectureTable">
@@ -97,37 +95,37 @@
         <div id="generalInformationPage">
             <div id="generalInfoTable" class="container">
                 <div class="row row-margin">
-                    <table class="table table-striped table-fixed ">
-                        <tbody>
+                    <table class="table"></table>
+                        <thead>
                             <tr>
-                            <td align="left" >
+                            <th scope="col" >
                                 <select>
                                     <option selected="selected">NOMBRE A-Z</option>
                                     <option>NOMBRE Z-A</option>
                                 </select>
-                            </td>
-                            <td>&#160;</td>
-                            <td colspan="2" align="right">
+                            </th>
+                            <th scope="col">
                                     <span class="spaceContent"><input type="radio" name="optradio" >LV ÓPTIMO</span>
                                     <span class="spaceContent"><input type="radio" name="optradio" >LV NO ÓPTIMO</span>
                                     <span class="spaceContent"><input type="radio" name="optradio" >SIN AVANCE</span>
-                            </td>
+                            </th>
                             </tr>
-                        </tbody>
+                        </thead>
                     </table>
                 </div>
                 <div class="row">
                     <table  class="table table-striped table-fixed ">
                         <thead>
                             <tr class="yellowlab text-uppercase">
-                                <th scope="col" class="fuschialab">NOMBRE</th>
-                                <th scope="col" class="yellowlab">PROM ALUMNA</th>
-                                <th scope="col" class="yellowlab">% QUIZZES</th>
-                                <th scope="col" class="yellowlab">% LECTURA</th>
+                              <th scope="col">Nombre</th>
+                              <th class="fuschialab" scope="col">Prom Alumna</th>
+                              <th scope="col">Avance Lecturas</th>
+                              <th scope="col">Promedio Quizzes</th>
+                              <th scope="col">Avance Ejercicios</th>
                             </tr>
-                            </thead>
-                        <tbody id="generalInfBody">
-                        </tbody>
+                          </thead>
+                          <tbody id="generalInfBody">
+                          </tbody>
                     </table>
                 </div>
             </div>

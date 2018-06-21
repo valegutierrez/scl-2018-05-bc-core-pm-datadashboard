@@ -69,29 +69,6 @@ describe('data', ()=>{
       });
     });
   });
-
-  describe('sortUsers(users, orderBy, orderDirection)', () => {
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC');
-    it('debería retornar arreglo de usuarios ordenado por nombre DESC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
-  });
-
-  describe('filterUsers(users, filterBy)', ()=>{
-    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
-  });
-
-  describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
-    it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
-  });
   describe('sortUsers(users, orderBy, orderDirection)', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);

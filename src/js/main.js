@@ -17,7 +17,7 @@ const inpStudent = document.getElementById('userFinder');
 function generalInformation(users) {
   btnInformation.addEventListener('click', () => {
     const renderUsers = users.forEach(element => {
-      let names = `<tr><td>${element.name}</td><td></td><td></td><td></td></tr>`;
+      let names = `<tr><td>${element.name}</td><td></td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
       return infTable.innerHTML += names;
     });
     changeTitle('INFORMACIÓN GENERAL');
@@ -29,7 +29,7 @@ function generalInformation(users) {
 function lectureProgress(users) {
   btnLecture.addEventListener('click', () => {
     const renderUsers = users.forEach(element => {
-      let names = `<tr><td>${element.name}</td><td>${element.stats.reads.percent}%</td><td></td><td></td><td></td></tr>`;
+      let names = `<tr><td>${element.name}</td><td>${element.stats.reads.percent}</td></tr>`;
       return lecTable.innerHTML += names;
     });
     changeTitle('AVANCE DE LECTURAS');// Cambia el titulo por información general
