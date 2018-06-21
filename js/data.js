@@ -15,6 +15,11 @@ function getApiData(cohort) {
     if (users && progress && courses) {
       computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
     }
+    console.log('pos aqui empieza');
+    console.log(filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
+    console.log(filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
+    console.log('pos aqui termina');
+
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
       console.log('Error al llamar API.' + error);
@@ -112,3 +117,9 @@ function getCohorts(cohorts) { // Arma el contenido del desplejable de cohorts.
   });
   return renderCohorts;
 };
+
+function filterUsers(users, search) { // Función de filtro de usuario
+  return users.filter(function(studentFilter) {
+    return studentFilter.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  });
+}
