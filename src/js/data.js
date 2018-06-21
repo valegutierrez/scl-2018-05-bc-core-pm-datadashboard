@@ -26,12 +26,17 @@ function getApiData(cohort) {
     });
 }
 function computeUserStats(users, progress, courses) {
-/*   users.forEach(element => {
-for (javascript in progress) {
-element['js'] = progress[javascript];
-};
-}); */
   users.forEach(element => {
+    let countPart = 0;
+    let totalRead = 0;
+    let totalQuiz = 0;
+    let totalExercise = 0;
+    let totalReadOk = 0;
+    let totalQuizOk = 0;
+    let totalExerciseOk = 0;
+    let totalScoreQuiz = 0;
+    let scoreSumQuiz = 0;
+    let scoreAvgQuiz = 0;
     let userProgress = progress[element.id]; // Obtiene progreso por usuario
     let porcentajetotal = 0; // Inicializa el acumulador de porcentaje
     for (var progKey in userProgress) { // Recorre los cursos
@@ -43,64 +48,54 @@ element['js'] = progress[javascript];
           for (var unitsInside in userProgress[progKey][unitKey]) { // Obtiene todas las unidades
             for (var groupKey in userProgress[progKey][unitKey][unitsInside]) {
               if (groupKey === 'parts') { // Obtiene el objeto de "Parts"
-                let countPart = 0;
-                let totalRead = 0;
-                let totalQuiz = 0;
-                let totalExercise = 0;
-                let totalReadOk = 0;
-                let totalQuizOk = 0;
-                let totalExerciseOk = 0;
-                let totalScoreQuiz = 0;
-                let scoreSumQuiz = 0;
-                let scoreAvgQuiz = 0;
+                
                 for (partKey in userProgress[progKey][unitKey][unitsInside][groupKey]) { // Recorre las "Parts"
                   switch (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].type) { // Elije tipo de parte
                   case 'read':
                     totalRead++; // Sumas una lectura al total
-                    if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1)
+                    if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalReadOk++; // Suma una lectura completada
-                    break;
+                    };
                   case 'quiz':
                     totalQuiz++;
                     if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalQuizOk++;						
                       scoreSumQuiz += parseInt(userProgress[progKey][unitKey][unitsInside][groupKey][partKey].score);// Obtiene puntajes de Quizzes
-                    }
-                    break;
+                    };
                   case 'exercise':
                     totalExercise++;// Suma un workshop al total
-                    if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1)
-                      totalExerciseOK++;// Suma uno a los completados				
-                    break;
+                    if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
+                      totalExerciseOk++;// Suma uno a los completados
+                    };		
                   }
                 }
-                let stats = { // Arma la nueva propiedad para el objeto Users
-                  percent: (scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk)),
-                  exercises: {
-                    total: totalExercise,
-                    completed: totalExerciseOk,
-                    percent: ((totalExerciseOk * 100) / (totalExercise === 0 ? 1 : totalExercise)) // Cambia los ceros por 1, para evitar division por 0
-                  },
-                  reads: {
-                    total: totalRead,
-                    completed: totalReadOk,
-                    percent: ((totalReadOk * 100) / (totalRead === 0 ? 1 : totalRead))
-                  },
-                  quizzes: {
-                    total: totalQuiz,
-                    completed: totalQuizOk,
-                    percent: ((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz)),
-                    scoreSum: scoreSumQuiz,
-                    scoreAvg: (scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
-                  }
-                };
-                element['stats'] = stats;// Agrega la nueva propiedad al Users
-              }  
-            }
+              }
+            }  
           }
-        }
+        } 
       }
     }
+    let stats = { // Arma la nueva propiedad para el objeto Users
+      percent: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk)),
+      exercises: {
+        total: Math.round(totalExercise),
+        completed: Math.round(totalExerciseOk),
+        percent: Math.round((totalExerciseOk * 100) / (totalExercise === 0 ? 1 : totalExercise)) // Cambia los ceros por 1, para evitar division por 0
+      },
+      reads: {
+        total: Math.round(totalRead),
+        completed: Math.round(totalReadOk),
+        percent: Math.round((totalReadOk * 100) / (totalRead === 0 ? 1 : totalRead))
+      },
+      quizzes: {
+        total: Math.round(totalQuiz),
+        completed: Math.round(totalQuizOk),
+        percent: Math.round((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz)),
+        scoreSum: Math.round(scoreSumQuiz),
+        scoreAvg: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
+      }
+    };
+    element['stats'] = stats;// Agrega la nueva propiedad al Users
   });
   console.log(users);
   console.log(progress);
