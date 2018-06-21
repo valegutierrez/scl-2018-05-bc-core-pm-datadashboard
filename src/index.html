@@ -78,7 +78,7 @@
       </div>
       <div id="bodyContent" class="container-fluid">
       <!-- inicio Lectura en progreso-->
-        <div id="lectureProgressPage">
+        <div id="lectureProgressPage" class="row-margin">
           <table id="lectureTable" class="table table-striped table-fixed">
             <thead>
               <tr class="yellowlab text-uppercase">
@@ -95,47 +95,46 @@
         </div>
       <!--fin lectura en progreso-->
       <!--inicio informacion general-->
-        <div id="generalInformation">
-          <div class="container">
-              <div class="row">
-                  <table  class="table table-striped table-fixed ">
-                      <tbody>
-                        <tr>
-                          <td align="left" >
-                            <select>
-                                <option selected="selected">NOMBRE A-Z</option>
-                                <option>NOMBRE Z-A</option>
-                            </select>
-                          </td>
-                          <td>&#160;</td>
-                          <td colspan="2" align="right">
-                              <span class="spaceContent"><input type="radio" name="optradio" >LV ÓPTIMO</span>
-                              <span class="spaceContent"><input type="radio" name="optradio" >LV NO ÓPTIMO</span>
-                              <span class="spaceContent"><input type="radio" name="optradio" >SIN AVANCE</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="row">
-                <table id="generalInfoTable" class="table table-striped table-fixed ">
-                  <thead>
-                    <tr class="yellowlab text-uppercase"></tr>
-                      <th scope="col" class="fuschialab">NOMBRE</th>
-                      <th scope="col" class="yellowlab">PROM ALUMNA</th>
-                      <th scope="col" class="yellowlab">% QUIZZES</th>
-                      <th scope="col" class="yellowlab">% LECTURA</th>
-                    </tr>
-                  </thead>
-                  <tbody id="generalInfBody">
-                  </tbody>
-                </table>
-              </div>
-              <div class="row">
-                  <h6>RESUMEN COHORT</h6>
-              </div>
-              <div class="row">
-                <table class="table table-striped table-fixed infoTable">
+        <div id="generalInformationPage">
+            <div id="generalInfoTable" class="container">
+                <div class="row row-margin">
+                    <table class="table table-striped table-fixed ">
+                        <tbody>
+                            <tr>
+                            <td align="left" >
+                                <select>
+                                    <option selected="selected">NOMBRE A-Z</option>
+                                    <option>NOMBRE Z-A</option>
+                                </select>
+                            </td>
+                            <td>&#160;</td>
+                            <td colspan="2" align="right">
+                                    <span class="spaceContent"><input type="radio" name="optradio" >LV ÓPTIMO</span>
+                                    <span class="spaceContent"><input type="radio" name="optradio" >LV NO ÓPTIMO</span>
+                                    <span class="spaceContent"><input type="radio" name="optradio" >SIN AVANCE</span>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <table  class="table table-striped table-fixed ">
+                        <thead>
+                            <tr class="yellowlab text-uppercase">
+                                <th scope="col" class="fuschialab">NOMBRE</th>
+                                <th scope="col" class="yellowlab">PROM ALUMNA</th>
+                                <th scope="col" class="yellowlab">% QUIZZES</th>
+                                <th scope="col" class="yellowlab">% LECTURA</th>
+                            </tr>
+                            </thead>
+                        <tbody id="generalInfBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row row-margin">
+                 <h6>RESUMEN COHORT :</h6>
+                  <table id="cohortInfoTable" class="table table-striped table-fixed infoTable">
                     <thead>
                       <tr class="yellowlab text-uppercase"></tr>
                         <th scope="col" class="fuschialab">RANGO</th>
@@ -166,14 +165,14 @@
                     </tbody>
                   </table>                
               </div>
-              <div class="row">
-                <h6>ALUMNAS DESTACADAS</h6>
+              <div class="row row-margin">
+                <h6>ALUMNAS DESTACADAS :</h6>
               </div>
               <div class="row">
                   medallas
               </div>
             </div>
-      </div>
+        </div>
       <!--fin informacion general-->
       </div>
     </main>
