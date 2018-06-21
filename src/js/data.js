@@ -1,9 +1,9 @@
 const usersJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/users';
 const cohortsJson = 'https://api.laboratoria.la/cohorts';
 const progressJson = 'https://api.laboratoria.la/cohorts/scl-2018-05-bc-core-pm/progress';
-var users = '';
-var courses = '';
-var progress = '';
+var users = {};
+var progress = {};
+var courses = {};
 
 fetch(usersJson)
   .then(response => response.json())
@@ -12,16 +12,17 @@ fetch(usersJson)
     lectureProgress(usersData);
     findUser(usersData);
     generalInformation(usersData);
+    console.log(users);
   });
 
 fetch(cohortsJson)
   .then(response => response.json())
   .then(cohortsData => {
-    const filterCourses = cohortsData.forEach(element => {
-      courses += element.courseIndex;
+    const filterCourses = cohortsData.map(object => {
+      courses = object.coursesIndex;
+      return courses;
     });
     console.log(courses);
-    getCohorts(cohortsData);
   });
 
 fetch(progressJson)
@@ -38,5 +39,4 @@ function start() {
 }
 
 function computeUserStats(users, progress, courses) {
-
 }

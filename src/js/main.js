@@ -2,6 +2,7 @@ const lecTable = document.getElementById('infoLectureTable');
 const infTable = document.getElementById('generalInfBody');
 const btnLecture = document.getElementById('lectures');
 const btnInformation = document.getElementById('generalInfo');
+const inpStudent = document.getElementById('userFinder');
 
 // Se llama al momento de hacer click en el botón Información General
 const generalInformation = usersData => {
@@ -40,7 +41,14 @@ const getCohorts = cohortsData => {
 
 
 function findUser(usersData) {
-  /* Autocompleta el input con los nombres de las estudiantes */
+  const filterStudents = usersData.filter(element => element.role === 'student');
+  inpStudent.addEventListener('input', () => {
+    var returnName = [];
+    for (i = 0; i < filterStudents.length; i++) {
+      if ()
+      returnName.push(filterStudents[i]);
+    }
+  });
 }
 
 
