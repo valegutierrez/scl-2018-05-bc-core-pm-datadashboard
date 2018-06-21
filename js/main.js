@@ -1,56 +1,52 @@
+// constantes de tablas en html
 const lecTable = document.getElementById('infoLectureTable');
 const infTable = document.getElementById('generalInfBody');
+
+// constantes de secciones de la página
+const infPage = document.getElementById('generalInformationPage');
+const lecPage = document.getElementById('lectureProgressPage');
+
+// constantes de botones
 const btnLecture = document.getElementById('lectures');
 const btnInformation = document.getElementById('generalInfo');
+
+// constante de input
 const inpStudent = document.getElementById('userFinder');
 
 // Se llama al momento de hacer click en el botón Información General
-const generalInformation = usersData => {
+function generalInformation(users) {
   btnInformation.addEventListener('click', () => {
-    const filterStudents = usersData.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
+    const filterStudents = users.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
     const renderUsers = filterStudents.forEach(element => {
       let names = `<tr><td>${element.name}</td><td></td><td></td><td></td></tr>`;
       return infTable.innerHTML += names;
     });
     changeTitle('INFORMACIÓN GENERAL');
     hideContent();
-    document.getElementById('generalInformation').style.display = 'block';
+    infPage.style.display = 'block';
   });
 };
 // Se llama al momento de hacer click en el botón Avance de Lecturas
-const lectureProgress = usersData => {
+function lectureProgress(users) {
   btnLecture.addEventListener('click', () => {
-    const filterStudents = usersData.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
+    const filterStudents = users.filter(element => element.role === 'student');// Busca a las estudiantes dentro del array
     const renderUsers = filterStudents.forEach(element => {
       let names = `<tr><td>${element.name}</td><td></td><td></td><td></td><td></td></tr>`;
       return lecTable.innerHTML += names;
     });
     changeTitle('AVANCE DE LECTURAS');// Cambia el titulo por información general
     hideContent();// Esconde todos los contenidos
-    document.getElementById('lectureProgressPage').style.display = 'block';// Muestra el contenido información general
+    lecPage.style.display = 'block';// Muestra el contenido información general
   });
 };
 
-const getCohorts = cohortsData => {
-  const renderCohorts = cohortsData.forEach(element => {
+function getCohorts(cohorts) {
+  const renderCohorts = cohorts.forEach(element => {
     let cohortElement = `<a class="dropdown-item" href="#">${element.id}</href>`;
     return cohortsList.innerHTML += cohortElement;
   });
   return renderCohorts;
 };
-
-
-function findUser(usersData) {
-  const filterStudents = usersData.filter(element => element.role === 'student');
-  inpStudent.addEventListener('input', () => {
-    var returnName = [];
-    for (i = 0; i < filterStudents.length; i++) {
-      if ()
-      returnName.push(filterStudents[i]);
-    }
-  });
-}
-
 
 function printLectures() {
   /* imprime la data del array dentro de la tabla */ 
@@ -69,7 +65,7 @@ const changeTitle = titleText => {
   document.getElementById('titleDashboard').innerText = titleText;
 };
 
-const hideContent = () => {
+function hideContent() {
   const bodyContentChild = document.getElementById('bodyContent').children;
   for (let i = 0;i < bodyContentChild.length;i++) {
     bodyContentChild[i].style.display = 'none';
