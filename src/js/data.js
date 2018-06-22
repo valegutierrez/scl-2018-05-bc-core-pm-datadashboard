@@ -5,20 +5,22 @@ function getApiData(cohort) {
   Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
     fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
     fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses')
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
+    fetch('http://api.laboratoria.la/cohorts/')
   ]).then((responses)=>{ // Se cumplen promesas
     return Promise.all(responses.map((response => response.json()))); 
   }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
     const users = responseJsons[0].filter(element => element.role === 'student');
     const progress = responseJsons[1];
     const courses = responseJsons[2];
+    const cohorts = responseJsons[3];
     if (users && progress && courses) {
-      computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
+      window.computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
+      window.getCohorts(cohorts);
     }
-    console.log('pos aqui empieza');
-    console.log(filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
-    console.log(filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
-    console.log('pos aqui termina');
+    console.log(window.filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
+    console.log(window.filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
+    console.log(users[name]);
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
       console.log('Error al llamar API.' + error);
@@ -102,9 +104,10 @@ window.computeUserStats = (users, progress, courses) => {
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
-}
+  window.sortUsers(users, orderBy, orderDirection)
+};
 
-function getCohorts(cohorts) { // Arma el contenido del desplejable de cohorts.
+window.getCohorts = (cohorts) => { // Arma el contenido del desplegable de cohorts.
   const renderCohorts = cohorts.forEach(element => {
     let cohortElement = `<a class="dropdown-item" href="javascript:cohortsSelectChange('${element.id}');">${element.id}</href>`;
     return cohortsList.innerHTML += cohortElement;
@@ -112,8 +115,20 @@ function getCohorts(cohorts) { // Arma el contenido del desplejable de cohorts.
   return renderCohorts;
 };
 
-function filterUsers(users, search) { // Función de filtro de usuario
+window.filterUsers = (users, search) => { // Función de filtro de usuario
   return users.filter(function(studentFilter) {
     return studentFilter.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
   });
+};
+
+window.sortUsers = (users, orderBy, orderDirection) => {
+  if (orderDirection === 'ASC') {
+    return users[orderBy].sort(function(orderBy) {
+      return orderBy[a] - orderBy[b];
+    });
+  } else if (orderDirection === 'DESC') {
+    return users[orderBy].sort(function(orderBy) {
+      return orderBy[b] - orderBy[a];
+    });
+  }
 }

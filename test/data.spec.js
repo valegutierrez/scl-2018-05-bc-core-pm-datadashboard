@@ -162,14 +162,21 @@ describe('data', ()=>{
     });
   });
 
-  describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
+  describe('processCohortData({ options })', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
+    const options = {
+      cohort: cohort,
+      cohortData: { 
+        users: users, 
+        progress: progress},
+      orderBy: 'name',
+      orderDirection: 'ASC',
+      search: 'Ale'
+    };
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter', () => {
-      const processed = processCohortData(cohortData, orderBy, orderDirection, filterBy);
-      assert.equal(users.length, processed.length);
-
+      const processed = processCohortData(options);
       processed.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
         assert.isAtLeast(user.stats.percent, 0);
@@ -178,8 +185,14 @@ describe('data', ()=>{
         assert.isObject(user.stats.quizzes);
         assert.isObject(user.stats.reads);
       });
-      const filterUsers = filterUsers(users.stats);
-      const sortUsers = sortUsers(users.stats);
+      const filterUsers = filterUsers(users, options.search);
+      for (let i = 1; i < filterUsers.length; i++) {
+        assert.isTrue(filterUsers[i].name.toLowerCase().indexOf(options.search.toLowerCase()) > -1, 0);
+      }
+      const sortedUsers = sortUsers(processed, options.orderBy, options.orderDirection);
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].name.localeCompare[1].name, 0);
+      }
     });
   });
 });
