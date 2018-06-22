@@ -16,7 +16,38 @@ const inpStudent = document.getElementById('userFinder');
 // Se llama al momento de hacer click en el botón Información General
 function generalInformation(users) {
   btnInformation.addEventListener('click', () => {
+    let sinAvance = [0, 0, 0]; // Acumulador para sin avance de Quizzes, Lecturas, Ejercicios
+    let noOptimo = [0, 0, 0]; // Acumulador para no optimo de Quizzes, Lecturas, Ejercicios
+    let optimo = [0, 0, 0]; // Acumulador para optimo de Quizzes, Lecturas, Ejercicios
+
     const renderUsers = users.forEach(element => {
+      if (element.stats.quizzes.percent === 0) {
+        sinAvance[0]++;
+      }
+      if (element.stats.reads.percent === 0) {
+        sinAvance[1]++;
+      }
+      if (element.stats.exercises.percent === 0) {
+        sinAvance[2]++;
+      }
+      if (element.stats.quizzes.percent > 0 && element.stats.quizzes.percent < 70) {
+        noOptimo[0]++;
+      }
+      if (element.stats.reads.percent > 0 && element.stats.reads.percent < 70) {
+        noOptimo[1]++;
+      }
+      if (element.stats.exercises.percent > 0 && element.stats.exercises.percent < 70) {
+        noOptimo[2]++;
+      }
+      if (element.stats.quizzes.percent >= 70 && element.stats.quizzes.percent <= 100) {
+        optimo[0]++;
+      }
+      if (element.stats.reads.percent >= 70 && element.stats.reads.percent <= 100) {
+        optimo[1]++;
+      }
+      if (element.stats.exercises.percent >= 70 && element.stats.exercises.percent <= 100) {
+        optimo[2]++;
+      }
       let averageStudent = Math.round((element.stats.reads.percent + element.stats.quizzes.percent + element.stats.exercises.percent) / 3);
       let names = `<tr><td>${element.name}</td><td>${averageStudent}%</td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
       return infTable.innerHTML += names;
@@ -30,7 +61,7 @@ function generalInformation(users) {
 function lectureProgress(users) {
   btnLecture.addEventListener('click', () => {
     const renderUsers = users.forEach(element => {
-      let names = `<tr><td>${element.name}</td><td>${element.stats.reads.percent}</td></tr>`;
+      let names = `<tr><td>${element.name}</td><td>${element.stats.reads.percent}%</td></tr>`;
       return lecTable.innerHTML += names;
     });
     changeTitle('AVANCE DE LECTURAS');// Cambia el titulo por información general
