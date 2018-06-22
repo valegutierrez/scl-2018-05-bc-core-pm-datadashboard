@@ -1,20 +1,21 @@
-let gUsers;
-let gProgress;
-let gCourses;
-let gCohorts;
-
-window.onload = function start() {
-  
-  getApiData('scl-2018-05-bc-core-am');
-  
+let gUsers, gProgress, gCourses, gCohorts;
+window.onload = function() {
+  fetch('http://api.laboratoria.la/cohorts/')
+    .then(response => response.json())
+    .then(data => {
+      const cohorts = data;
+      if (cohorts) {
+        window.getCohorts(cohorts);
+      }
+    });
 };
-function getApiData(cohort) {
+function getApiData(options) {
   hideContent();
   titleCohort.innerText = 'cargando...';
   Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
+    fetch('https://api.laboratoria.la/cohorts/' + options + '/users'),
+    fetch('https://api.laboratoria.la/cohorts/' + options + '/progress'),
+    fetch('https://api.laboratoria.la/cohorts/' + options + '/courses'),
     fetch('http://api.laboratoria.la/cohorts/')
   ]).then((responses)=>{ // Se cumplen promesas
     return Promise.all(responses.map((response => response.json()))); 
@@ -22,8 +23,8 @@ function getApiData(cohort) {
     const users = responseJsons[0].filter(element => element.role === 'student');
     const progress = responseJsons[1];
     const courses = responseJsons[2];
-    const cohorts = responseJsons[3]
-    //actualizar variables globales
+    const cohorts = responseJsons[3];
+    // Actualizar variables globales
     gUsers = users;
     gProgress = progress;
     gCourses = courses;
@@ -31,17 +32,14 @@ function getApiData(cohort) {
 
     if (users && progress && courses) {
       window.computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
-      window.getCohorts(cohorts);
+
     }
-    titleCohort.innerText = cohort;
-    console.log(window.filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
-    console.log(window.filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
-    console.log(window.sortUsers(users, 'quizzesPercent', 'DESC'));
+    titleCohort.innerText = options;
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
       console.log('Error al llamar API.' + error);
     });
-}
+};
 // constantes de tablas en html
 const lecTable = document.getElementById('infoLectureTable');
 const infTable = document.getElementById('generalInfBody');
@@ -101,7 +99,7 @@ function resumenStudentBody(users, search) {
   });
   resStdPage.style.display = 'block';
 }
-//RESUMEN COHORT
+// RESUMEN COHORT
 function resumenCohort(users) {
   let sinAvance = [0, 0, 0]; // Acumulador para sin avance de Quizzes, Lecturas, Ejercicios
   let noOptimo = [0, 0, 0]; // Acumulador para no optimo de Quizzes, Lecturas, Ejercicios
@@ -166,30 +164,24 @@ function lectureProgress(users) {
   lecPage.style.display = 'block';// Muestra el contenido información general
 };
 
-// Cambia el titulo del dashboard
+// Cambia el titulo de la página
 const changeTitle = titleText => {
   document.getElementById('titleDashboard').innerText = titleText;
 };
 
-function orderNameChange() {//ordena la grilla general por nombre de estudiante
+function orderNameChange() {// Ordena la grilla general por nombre de estudiante
   const selectedIndex = document.getElementById('comboBoxOrder').selectedIndex;
   const selectedItem = document.getElementById('comboBoxOrder').options[selectedIndex];
-<<<<<<< HEAD
-
-  // selectedItem.value
-  // TODO: hacer ordenamiento.
-=======
   sortUsers(gUsers, 'name', selectedItem.value);
   generalInformation(gUsers);
   resumenCohort(gUsers);
 }
-function orderAvgChange() {//ordena la grilla general por promedio de estudiante
+function orderAvgChange() {// Ordena la grilla general por promedio de estudiante
   const selectedIndex = document.getElementById('comboBoxOrderAvg').selectedIndex;
   const selectedItem = document.getElementById('comboBoxOrderAvg').options[selectedIndex];
   sortUsers(gUsers, 'percent', selectedItem.value);
   generalInformation(gUsers);
   resumenCohort(gUsers);
->>>>>>> upstream/master
 }
 
 function categoryFilter() {
@@ -219,16 +211,14 @@ function categoryFilter() {
 	    break;
   }
 }
-
 function hideContent() {
   const bodyContentChild = document.getElementById('bodyContent').children;
   for (let i = 0;i < bodyContentChild.length;i++) {
     bodyContentChild[i].style.display = 'none';
   }   
 };
-
-function cohortsSelectChange(cohort) {
-  getApiData(cohort);
+function cohortsSelectChange(options) {
+  getApiData(options);
 }
 
 
