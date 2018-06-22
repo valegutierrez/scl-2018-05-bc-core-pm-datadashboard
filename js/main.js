@@ -120,8 +120,8 @@ function orderChange() {
   const selectedIndex = document.getElementById('comboBoxOrder').selectedIndex;
   const selectedItem = document.getElementById('comboBoxOrder').options[selectedIndex];
 
-  //selectedItem.value
-  //TODO: hacer ordenamiento.
+  // selectedItem.value
+  // TODO: hacer ordenamiento.
 }
 function categoryFilter() {
 
