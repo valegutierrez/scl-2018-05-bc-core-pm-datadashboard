@@ -37,16 +37,24 @@ function getApiData(cohort) {
 const lecTable = document.getElementById('infoLectureTable');
 const infTable = document.getElementById('generalInfBody');
 const resStdTable = document.getElementById('resumenStudentBody');
+const pQuizzesTable = document.getElementById('pQuizzesTable');
+const pEjerciciosTable = document.getElementById('pEjerciciosTable');
+const infoPQuizzesTable = document.getElementById('infoPQuizzesTable');
+const infoPEjerciciosTable = document.getElementById('infoPEjerciciosTable');
 
 // constantes de secciones de la página
 const infPage = document.getElementById('generalInformationPage');
 const lecPage = document.getElementById('lectureProgressPage');
 const resStdPage = document.getElementById('resumenStudentPage');
+const pQuizzesProgressPage = document.getElementById('pQuizzesProgressPage');
+const pEjerciciosProgressPage = document.getElementById('pEjerciciosProgressPage');
 
 // constantes de botones
 const btnLecture = document.getElementById('lectures');
 const btnInformation = document.getElementById('generalInfo');
 const btnResumenAlumna = document.getElementById('btnResumenAlumna');
+const pQuizzes = document.getElementById('pQuizzes');
+const pEjercicios = document.getElementById('pEjercicios');
 
 // constante de input
 const inpStudent = document.getElementById('userFinder');
@@ -156,8 +164,33 @@ function lectureProgress(users) {
   hideContent();// Esconde todos los contenidos
   lecPage.style.display = 'block';// Muestra el contenido información general
 };
+// Se llama al momento de hacer click en el botón promedio quizzes
+pQuizzes.addEventListener('click', () => {
+  quizzesAverage(gUsers);
+});
+function quizzesAverage(users) {
+  const renderUsers = users.forEach(element => {
+    let names = `<tr><td>${element.name}</td><td>${isNaN(element.stats.quizzes.scoreAvg) ? 0 : element.stats.quizzes.scoreAvg}%</td></tr>`;
+    return infoPQuizzesTable.innerHTML += names;
+  });
+  changeTitle('PROMEDIO DE QUIZZES');// Cambia el titulo por información general
+  hideContent();// Esconde todos los contenidos
+  pQuizzesProgressPage.style.display = 'block';// Muestra el contenido información general
+};
 
-// Cambia el titulo de la página
+pEjercicios.addEventListener('click', () => {
+  ejerciciosAverage(gUsers);
+});
+function ejerciciosAverage(users) {
+  const renderUsers = users.forEach(element => {
+    let names = `<tr><td>${element.name}</td><td>${isNaN(element.stats.exercises.percent) ? 0 : element.stats.exercises.percent}%</td></tr>`;
+    return infoPEjerciciosTable.innerHTML += names;
+  });
+  changeTitle('AVANCE DE EJERCICIOS');// Cambia el titulo por información general
+  hideContent();// Esconde todos los contenidos
+  pEjerciciosProgressPage.style.display = 'block';// Muestra el contenido información general
+};
+// Cambia el titulo del dashboard
 const changeTitle = titleText => {
   document.getElementById('titleDashboard').innerText = titleText;
 };
