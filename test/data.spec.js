@@ -80,17 +80,49 @@ describe('data', ()=>{
       }
     });
     it('debería retornar arreglo de usuarios ordenado por nombre DESC', ()=> {
-      const sortedUsers = sortUsers(processed, 'name', 'ASC');
+      const sortedUsers = sortUsers(processed, 'name', 'DESC');
       for (let i = 1; i < sortUsers.length; i++) {
         assert.isAtLeast(sortedUsers[0].name.localeCompare[1].name, 0);
       }
     });
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.percent', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].stats.percent.localeCompare[1].stats.percent, 0);
+      }
+    });
+      
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.percent', 'DESC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtLeast(sortedUsers[0].stats.percent.localeCompare[1].stats.percent, 0);
+      }
+    });
+
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.exercises.completed', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].stats.exercises.completed.localeCompare[1].stats.exercises.completed, 0);
+      }
+    });
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.exercises.completed', 'DESC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtLeast(sortedUsers[0].stats.exercises.completed.localeCompare[1].stats.exercises.completed, 0);
+      }
+    });
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.quizzes.completed', 'ASC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtMost(sortedUsers[0].stats.quizzes.completed.localeCompare[1].stats.quizzes.completed, 0);
+      }
+    });
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC', ()=>{
+      const sortedUsers = sortUsers(processed, 'stats.quizzes.completed', 'DESC');
+      for (let i = 1; i < sortUsers.length; i++) {
+        assert.isAtLeast(sortedUsers[0].stats.quizzes.completed.localeCompare[1].stats.quizzes.completed, 0);
+      }
+    });
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
