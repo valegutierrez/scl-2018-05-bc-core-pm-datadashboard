@@ -19,13 +19,12 @@ function getApiData(cohort) {
     console.log(filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
     console.log(filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
     console.log('pos aqui termina');
-
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
       console.log('Error al llamar API.' + error);
     });
 }
-function computeUserStats(users, progress, courses) {
+window.computeUserStats = (users, progress, courses) => {
   users.forEach(element => {
     let countPart = 0;
     let totalRead = 0;
