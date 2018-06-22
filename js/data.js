@@ -1,73 +1,36 @@
-window.onload = function start() {
-  getApiData('scl-2018-05-bc-core-pm');
-};
-function getApiData(cohort) {
-  Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
-    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
-    fetch('http://api.laboratoria.la/cohorts/')
-  ]).then((responses)=>{ // Se cumplen promesas
-    return Promise.all(responses.map((response => response.json()))); 
-  }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
-    const users = responseJsons[0].filter(element => element.role === 'student');
-    const progress = responseJsons[1];
-    const courses = responseJsons[2];
-    const cohorts = responseJsons[3];
-    if (users && progress && courses) {
-      window.computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
-      window.getCohorts(cohorts);
-    }
-    console.log(window.filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
-    console.log(window.filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
-    console.log(users[name]);
-  }).catch(
-    (error)=>{ // Si una llamada falla se ejecuta error.
-      console.log('Error al llamar API.' + error);
-    });
-}
 window.computeUserStats = (users, progress, courses) => {
   users.forEach(element => {
-    let countPart = 0;
-    let totalRead = 0;
-    let totalQuiz = 0;
-    let totalExercise = 0;
-    let totalReadOk = 0;
-    let totalQuizOk = 0;
-    let totalExerciseOk = 0;
-    let totalScoreQuiz = 0;
-    let scoreSumQuiz = 0;
-    let scoreAvgQuiz = 0;
+    let countPart = 0, totalRead = 0, totalQuiz = 0, totalExercise = 0, totalReadOk = 0, totalQuizOk = 0, totalExerciseOk = 0, totalScoreQuiz = 0, scoreSumQuiz = 0, scoreAvgQuiz = 0;
     let userProgress = progress[element.id]; // Obtiene progreso por usuario
-    let porcentajetotal = 0; // Inicializa el acumulador de porcentaje
     for (var progKey in userProgress) { // Recorre los cursos
       for (var unitKey in userProgress[progKey]) { // Recorre las unidades
-        if (unitKey === 'percent') { 
-          porcentajetotal += parseInt(userProgress[progKey][unitKey]); // Selecciona el porcentaje de unidad
-        }
         if (unitKey === 'units') {
           for (var unitsInside in userProgress[progKey][unitKey]) { // Obtiene todas las unidades
             for (var groupKey in userProgress[progKey][unitKey][unitsInside]) {
               if (groupKey === 'parts') { // Obtiene el objeto de "Parts"
-                
                 for (partKey in userProgress[progKey][unitKey][unitsInside][groupKey]) { // Recorre las "Parts"
                   switch (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].type) { // Elije tipo de parte
                   case 'read':
                     totalRead++; // Sumas una lectura al total
+                    countPart++;
                     if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalReadOk++; // Suma una lectura completada
+                      countPart++;
                     };
                   case 'quiz':
                     totalQuiz++;
                     if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalQuizOk++;						
+                      countPart++;
                       scoreSumQuiz += parseInt(userProgress[progKey][unitKey][unitsInside][groupKey][partKey].score);// Obtiene puntajes de Quizzes
                     };
                   case 'exercise':
                     totalExercise++;// Suma un workshop al total
+                    countPart++;
                     if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalExerciseOk++;// Suma uno a los completados
-                    };		
+                      countPart++;
+                    };
                   }
                 }
               }
@@ -77,7 +40,8 @@ window.computeUserStats = (users, progress, courses) => {
       }
     }
     let stats = { // Arma la nueva propiedad para el objeto Users
-      percent: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk)),
+      parts: countPart,
+      percent: Math.round((((totalExerciseOk * 100) / (totalExercise === 0 ? 1 : totalExercise)) + ((totalReadOk * 100) / (totalRead === 0 ? 1 : totalRead)) + ((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz))) / 3),
       exercises: {
         total: Math.round(totalExercise),
         completed: Math.round(totalExerciseOk),
@@ -94,7 +58,7 @@ window.computeUserStats = (users, progress, courses) => {
         percent: Math.round((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz)),
         scoreSum: Math.round(scoreSumQuiz),
         scoreAvg: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
-      }
+      },
     };
     element['stats'] = stats;// Agrega la nueva propiedad al Users
   });
@@ -104,7 +68,6 @@ window.computeUserStats = (users, progress, courses) => {
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
-  window.sortUsers(users, orderBy, orderDirection)
 };
 
 window.getCohorts = (cohorts) => { // Arma el contenido del desplegable de cohorts.
@@ -122,13 +85,38 @@ window.filterUsers = (users, search) => { // Función de filtro de usuario
 };
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-  if (orderDirection === 'ASC') {
-    return users[orderBy].sort(function(orderBy) {
-      return orderBy[a] - orderBy[b];
-    });
-  } else if (orderDirection === 'DESC') {
-    return users[orderBy].sort(function(orderBy) {
-      return orderBy[b] - orderBy[a];
-    });
-  }
-}
+  let sortedUsers = users;
+  if (orderBy === 'name') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.name.localeCompare(second.name));
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.name.localeCompare(second.name)).reverse();
+    }
+  };
+  if (orderBy === 'exercisesPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent).reverse();
+    }
+  };
+  if (orderBy === 'quizzesPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent).reverse();
+    }
+  };
+  if (orderBy === 'readsPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent).reverse();
+    }
+  };
+  return sortedUsers;
+};
