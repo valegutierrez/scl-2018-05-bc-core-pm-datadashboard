@@ -17,7 +17,8 @@ const inpStudent = document.getElementById('userFinder');
 function generalInformation(users) {
   btnInformation.addEventListener('click', () => {
     const renderUsers = users.forEach(element => {
-      let names = `<tr><td>${element.name}</td><td></td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
+      let averageStudent = Math.round((element.stats.reads.percent + element.stats.quizzes.percent + element.stats.exercises.percent) / 3);
+      let names = `<tr><td>${element.name}</td><td>${averageStudent}%</td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
       return infTable.innerHTML += names;
     });
     changeTitle('INFORMACIÓN GENERAL');
