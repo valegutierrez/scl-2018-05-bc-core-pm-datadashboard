@@ -22,7 +22,8 @@ window.computeUserStats = (users, progress, courses) => {
                     if (userProgress[progKey][unitKey][unitsInside][groupKey][partKey].completed === 1) {
                       totalQuizOk++;						
                       countPart++;
-                      scoreSumQuiz += parseInt(userProgress[progKey][unitKey][unitsInside][groupKey][partKey].score);// Obtiene puntajes de Quizzes
+                      let score = userProgress[progKey][unitKey][unitsInside][groupKey][partKey].score;
+                      scoreSumQuiz += parseInt(score === undefined ? 0 : score);// Obtiene puntajes de Quizzes
                     };
                   case 'exercise':
                     totalExercise++;// Suma un workshop al total
