@@ -65,6 +65,7 @@ window.computeUserStats = (users, progress, courses) => {
   console.log(users);
   console.log(progress);
   console.log(courses);
+  window.processCohortData();
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
@@ -84,4 +85,72 @@ window.filterUsers = (users, search) => { // Función de filtro de usuario
     return studentFilter.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
   });
 };
-
+window.sortUsers = (users, orderBy, orderDirection) => {
+  let sorted = [];
+  if (orderBy === 'name') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.name.localeCompare(second.name));
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.name.localeCompare(second.name)).reverse();
+    }
+  };
+  if (orderBy === 'percent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent).reverse();
+    }
+  };
+  if (orderBy === 'exercisesPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent).reverse();
+    }
+  };
+  if (orderBy === 'quizzesPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent).reverse();
+    }
+  };
+  if (orderBy === 'quizzesScorePercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg).reverse();
+    }
+  };
+  if (orderBy === 'readsPercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent).reverse();
+    }
+  };
+  return sorted;
+};
+window.processCohortData = (options) => {
+  window.computeUserStats();
+  window.sortUsers();
+  window.filterUsers();
+  var options = {
+    cohort: cohort,
+    cohortData: {
+      users: users,
+      progress: progress
+    },
+    orderBy: orderBy,
+    orderDirection: orderDirection,
+    search: search,
+  };
+  console.log(options);
+  return options;
+};
