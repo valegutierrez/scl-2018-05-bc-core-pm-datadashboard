@@ -41,49 +41,54 @@ const btnInformation = document.getElementById('generalInfo');
 // constante de input
 const inpStudent = document.getElementById('userFinder');
 
+btnInformation.addEventListener('click', () => {
+  generalInformation(users);
+});
 // Se llama al momento de hacer click en el botón Información General
 function generalInformation(users) {
-  btnInformation.addEventListener('click', () => {
-    let sinAvance = [0, 0, 0]; // Acumulador para sin avance de Quizzes, Lecturas, Ejercicios
-    let noOptimo = [0, 0, 0]; // Acumulador para no optimo de Quizzes, Lecturas, Ejercicios
-    let optimo = [0, 0, 0]; // Acumulador para optimo de Quizzes, Lecturas, Ejercicios
-    const renderUsers = users.forEach(element => {
-      if (element.stats.quizzes.percent === 0) {
-        sinAvance[0]++;
-      }
-      if (element.stats.reads.percent === 0) {
-        sinAvance[1]++;
-      }
-      if (element.stats.exercises.percent === 0) {
-        sinAvance[2]++;
-      }
-      if (element.stats.quizzes.percent > 0 && element.stats.quizzes.percent < 70) {
-        noOptimo[0]++;
-      }
-      if (element.stats.reads.percent > 0 && element.stats.reads.percent < 70) {
-        noOptimo[1]++;
-      }
-      if (element.stats.exercises.percent > 0 && element.stats.exercises.percent < 70) {
-        noOptimo[2]++;
-      }
-      if (element.stats.quizzes.percent >= 70 && element.stats.quizzes.percent <= 100) {
-        optimo[0]++;
-      }
-      if (element.stats.reads.percent >= 70 && element.stats.reads.percent <= 100) {
-        optimo[1]++;
-      }
-      if (element.stats.exercises.percent >= 70 && element.stats.exercises.percent <= 100) {
-        optimo[2]++;
-      }
-      let names = `<tr><td>${element.name}</td><td>${element.stats.percent}%</td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
-      return infTable.innerHTML += names; 
-    });
-    
-    summaryCohorts(sinAvance, noOptimo, optimo, users.length);
-    changeTitle('INFORMACIÓN GENERAL');
-    hideContent();
-    infPage.style.display = 'block';
+  document.getElementById('generalInfBody').innerHTML = '';
+  let sinAvance = [0, 0, 0]; // Acumulador para sin avance de Quizzes, Lecturas, Ejercicios
+  let noOptimo = [0, 0, 0]; // Acumulador para no optimo de Quizzes, Lecturas, Ejercicios
+  let optimo = [0, 0, 0]; // Acumulador para optimo de Quizzes, Lecturas, Ejercicios
+  const renderUsers = users.forEach(element => {
+    if (element.stats.quizzes.percent === 0) {
+      sinAvance[0]++;
+    }
+    if (element.stats.reads.percent === 0) {
+      sinAvance[1]++;
+    }
+    if (element.stats.exercises.percent === 0) {
+      sinAvance[2]++;
+    }
+    if (element.stats.quizzes.percent > 0 && element.stats.quizzes.percent < 70) {
+      noOptimo[0]++;
+    }
+    if (element.stats.reads.percent > 0 && element.stats.reads.percent < 70) {
+      noOptimo[1]++;
+    }
+    if (element.stats.exercises.percent > 0 && element.stats.exercises.percent < 70) {
+      noOptimo[2]++;
+    }
+    if (element.stats.quizzes.percent >= 70 && element.stats.quizzes.percent <= 100) {
+      optimo[0]++;
+    }
+    if (element.stats.reads.percent >= 70 && element.stats.reads.percent <= 100) {
+      optimo[1]++;
+    }
+    if (element.stats.exercises.percent >= 70 && element.stats.exercises.percent <= 100) {
+      optimo[2]++;
+    }
+    // Los promedios se obtienen de aqui
+    let averageStudent = Math.round((element.stats.reads.percent + element.stats.quizzes.percent + element.stats.exercises.percent) / 3);
+    let names = `<tr><td>${element.name}</td><td>${averageStudent}%</td><td>${element.stats.reads.percent}%</td><td>${element.stats.quizzes.percent}%</td><td>${element.stats.exercises.percent}%</td></tr>`;
+    return infTable.innerHTML += names; 
+
   });
+  
+  summaryCohorts(sinAvance, noOptimo, optimo, users.length);
+  changeTitle('INFORMACIÓN GENERAL');
+  hideContent();
+  infPage.style.display = 'block';
 };
 // Porcentajes totales
 function summaryCohorts(sinAvance, noOptimo, optimo, userCount) {
@@ -124,8 +129,31 @@ function orderChange() {
   // TODO: hacer ordenamiento.
 }
 function categoryFilter() {
-
-
+  const SelectedFilter = document.querySelector('input[name="optradio"]:checked').value;
+  switch (SelectedFilter){
+	  case 'Todos':
+		  generalInformation(users);
+	    break;	  
+	  case 'Optimo':
+		  let filterUser = users.filter(function(studentFilter) {
+	    let averageStudent = Math.round((studentFilter.stats.reads.percent + studentFilter.stats.quizzes.percent + studentFilter.stats.exercises.percent) / 3);
+			  return averageStudent >= 70 && averageStudent <= 100;
+		  });
+		  generalInformation(filterUser);
+	    break;
+	  case 'NoOptimo':
+	    generalInformation(users.filter(function(studentFilter) {
+			  let averageStudent = Math.round((studentFilter.stats.reads.percent + studentFilter.stats.quizzes.percent + studentFilter.stats.exercises.percent) / 3);
+			  return averageStudent > 0 && averageStudent < 70;
+		  }));
+	    break;
+	  case 'sinAvanze':
+	    generalInformation(users.filter(function(studentFilter) {
+			  let averageStudent = Math.round((studentFilter.stats.reads.percent + studentFilter.stats.quizzes.percent + studentFilter.stats.exercises.percent) / 3);
+			  return averageStudent === 0;
+		  }));
+	    break;
+  }
 }
 
 function hideContent() {
