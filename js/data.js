@@ -102,7 +102,7 @@ window.computeUserStats = (users, progress, courses) => {
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
-}
+};
 
 function getCohorts(cohorts) { // Arma el contenido del desplejable de cohorts.
   const renderCohorts = cohorts.forEach(element => {
