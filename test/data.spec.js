@@ -130,7 +130,16 @@ describe('data', ()=>{
   });
 
   describe('filterUsers(users, filterBy)', ()=>{
-    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)', ()=>{
+      const searchUser = 'Ale';
+      const filterUsers = filterUsers(users, searchUser);
+      for (let i = 1; i < filterUsers.length; i++) {
+        assert.isTrue(filterUsers[i].name.toLowerCase().indexOf(searchUser.toLowerCase()) > -1, 0);
+      }
+    });
   });
 
   describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
