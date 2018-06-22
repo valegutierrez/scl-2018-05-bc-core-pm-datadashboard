@@ -1,22 +1,15 @@
 let gUsers, gProgress, gCourses, gCohorts;
 window.onload = function() {
-  fetch('http://api.laboratoria.la/cohorts/')
-    .then(response => response.json())
-    .then(data => {
-      const cohorts = data;
-      if (cohorts) {
-        window.getCohorts(cohorts);
-      }
-    });
-};
-function getApiData(options) {
+  getApiData('scl-2018-05-bc-core-pm');
+}
+function getApiData(cohort) {
   hideContent();
   titleCohort.innerText = 'cargando...';
   Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
-    fetch('https://api.laboratoria.la/cohorts/' + options + '/users'),
-    fetch('https://api.laboratoria.la/cohorts/' + options + '/progress'),
-    fetch('https://api.laboratoria.la/cohorts/' + options + '/courses'),
-    fetch('http://api.laboratoria.la/cohorts/')
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
+    fetch('https://api.laboratoria.la/cohorts/')
   ]).then((responses)=>{ // Se cumplen promesas
     return Promise.all(responses.map((response => response.json()))); 
   }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
@@ -25,19 +18,19 @@ function getApiData(options) {
     const courses = responseJsons[2];
     const cohorts = responseJsons[3];
     // Actualizar variables globales
+    gCohorts = cohorts;
     gUsers = users;
     gProgress = progress;
     gCourses = courses;
-    gCohorts = cohorts;
 
     if (users && progress && courses) {
       window.computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
-
-    }
-    titleCohort.innerText = options;
+      window.getCohorts(cohorts);
+    };
+    titleCohort.innerText = cohort;
   }).catch(
     (error)=>{ // Si una llamada falla se ejecuta error.
-      console.log('Error al llamar API.' + error);
+      console.log(error.stack);
     });
 };
 // constantes de tablas en html
@@ -171,14 +164,14 @@ const changeTitle = titleText => {
 
 function orderNameChange() {// Ordena la grilla general por nombre de estudiante
   const selectedIndex = document.getElementById('comboBoxOrder').selectedIndex;
-  const selectedItem = document.getElementById('comboBoxOrder').options[selectedIndex];
+  const selectedItem = document.getElementById('comboBoxOrder').cohort[selectedIndex];
   sortUsers(gUsers, 'name', selectedItem.value);
   generalInformation(gUsers);
   resumenCohort(gUsers);
 }
 function orderAvgChange() {// Ordena la grilla general por promedio de estudiante
   const selectedIndex = document.getElementById('comboBoxOrderAvg').selectedIndex;
-  const selectedItem = document.getElementById('comboBoxOrderAvg').options[selectedIndex];
+  const selectedItem = document.getElementById('comboBoxOrderAvg').cohort[selectedIndex];
   sortUsers(gUsers, 'percent', selectedItem.value);
   generalInformation(gUsers);
   resumenCohort(gUsers);
@@ -217,8 +210,6 @@ function hideContent() {
     bodyContentChild[i].style.display = 'none';
   }   
 };
-function cohortsSelectChange(options) {
-  getApiData(options);
+function cohortsSelectChange(cohort) {
+  getApiData(cohort);
 }
-
-
