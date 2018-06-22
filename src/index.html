@@ -98,17 +98,18 @@
                     <table class="table"></table>
                         <thead>
                             <tr>
-                            <th scope="col" >
-                                <select id="comboBoxOrder" onchange="orderChange()">
-                                    <option value="ASC" selected="selected">NOMBRE A-Z</option>
-                                    <option value="DESC" >NOMBRE Z-A</option>
-                                </select>
-                            </th>
-                            <th scope="col">
-                                <span class="spaceContent"><input type="radio" name="optradio" >LV ÓPTIMO</span>
-                                <span class="spaceContent"><input type="radio" name="optradio" >LV NO ÓPTIMO</span>
-                                <span class="spaceContent"><input type="radio" name="optradio" >SIN AVANCE</span>
-                            </th>
+                                <th scope="col" >
+                                    <select id="comboBoxOrder" onchange="orderChange()">
+                                        <option value="ASC" selected="selected">NOMBRE A-Z</option>
+                                        <option value="DESC" >NOMBRE Z-A</option>
+                                    </select>
+                                </th>
+                                <th scope="col">
+                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Todos" >Todos</span>
+                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Optimo" >LV ÓPTIMO</span>
+                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="NoOptimo" >LV NO ÓPTIMO</span>
+                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="sinAvanze" >SIN AVANCE</span>
+                                </th>
                             </tr>
                         </thead>
                     </table>

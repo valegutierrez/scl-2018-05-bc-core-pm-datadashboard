@@ -1,3 +1,7 @@
+let users;
+let progress;
+let courses;
+
 window.onload = function start() {
   getApiData('scl-2018-05-bc-core-pm');
 };
@@ -9,9 +13,9 @@ function getApiData(cohort) {
   ]).then((responses)=>{ // Se cumplen promesas
     return Promise.all(responses.map((response => response.json()))); 
   }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
-    const users = responseJsons[0].filter(element => element.role === 'student');
-    const progress = responseJsons[1];
-    const courses = responseJsons[2];
+    users = responseJsons[0].filter(element => element.role === 'student');
+    progress = responseJsons[1];
+    courses = responseJsons[2];
     if (users && progress && courses) {
       computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
     }
