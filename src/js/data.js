@@ -94,6 +94,14 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       sorted = users.sort((first, second) => first.name.localeCompare(second.name)).reverse();
     }
   };
+  if (orderBy === 'percent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent).reverse();
+    }
+  };
   if (orderBy === 'exercisesPercent') {
     if (orderDirection === 'ASC') {
       sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent);
@@ -108,6 +116,14 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     }
     if (orderDirection === 'DESC') {
       sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent).reverse();
+    }
+  };
+  if (orderBy === 'quizzesScorePercent') {
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg).reverse();
     }
   };
   if (orderBy === 'readsPercent') {
