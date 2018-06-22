@@ -1,3 +1,31 @@
+window.onload = function start() {
+  getApiData('scl-2018-05-bc-core-pm');
+};
+function getApiData(cohort) {
+  Promise.all([ // Llama la info de API en paralelo(Todas a la vez)
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
+    fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
+    fetch('http://api.laboratoria.la/cohorts/')
+  ]).then((responses)=>{ // Se cumplen promesas
+    return Promise.all(responses.map((response => response.json()))); 
+  }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
+    const users = responseJsons[0].filter(element => element.role === 'student');
+    const progress = responseJsons[1];
+    const courses = responseJsons[2];
+    const cohorts = responseJsons[3];
+    if (users && progress && courses) {
+      window.computeUserStats(users, progress, courses);// Llama al computerUserStats con datos obtenidos de la API
+      window.getCohorts(cohorts);
+    }
+    console.log(window.filterUsers(users, 'lor')); // deberia devolver solo un elemento en el array
+    console.log(window.filterUsers(users, 'ana')); // deberia devolver tres elemento en el array
+    console.log(window.sortUsers(users, 'quizzesPercent', 'DESC'));
+  }).catch(
+    (error)=>{ // Si una llamada falla se ejecuta error.
+      console.log('Error al llamar API.' + error);
+    });
+}
 // constantes de tablas en html
 const lecTable = document.getElementById('infoLectureTable');
 const infTable = document.getElementById('generalInfBody');
@@ -37,19 +65,6 @@ function lectureProgress(users) {
     lecPage.style.display = 'block';// Muestra el contenido información general
   });
 };
-
-function printLectures() {
-  /* imprime la data del array dentro de la tabla */ 
-}
-
-function exerciseProgress() {
-  /* Se llaman los arrays de .JSON para usarlos en la siguiente función */
-  printExercises();
-}
-
-function printExercises() {
-  /* imprime la data del array dentro de la tabla */ 
-}
 // Cambia el titulo del dashboard
 const changeTitle = titleText => {
   document.getElementById('titleDashboard').innerText = titleText;
@@ -61,9 +76,5 @@ function hideContent() {
     bodyContentChild[i].style.display = 'none';
   }   
 };
-// Se ejecuta al momento de seleccionar un cohort, obteniendo los datos del cohort seleccionado desde la API
-function cohortsSelectChange(cohortId) {
-  getApiData(cohortId);
-}
 
 

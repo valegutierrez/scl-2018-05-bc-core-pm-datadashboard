@@ -155,9 +155,9 @@ describe('data', ()=>{
     const { users, progress } = fixtures;
     it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)', () => {
       const searchUser = 'Ale';
-      const filterUsers = filterUsers(users, searchUser);
+      const filteredUsers = filterUsers(users, searchUser);
       for (let i = 1; i < filterUsers.length; i++) {
-        assert.isTrue(filterUsers[i].name.toLowerCase().indexOf(searchUser.toLowerCase()) > -1, 0);
+        assert.isTrue(filteredUsers[i].name.toLowerCase().indexOf(searchUser.toLowerCase()) > -1, 0);
       }
     });
   });
@@ -185,9 +185,9 @@ describe('data', ()=>{
         assert.isObject(user.stats.quizzes);
         assert.isObject(user.stats.reads);
       });
-      const filterUsers = filterUsers(users, options.search);
+      const filteredUsers = filterUsers(users, options.search);
       for (let i = 1; i < filterUsers.length; i++) {
-        assert.isTrue(filterUsers[i].name.toLowerCase().indexOf(options.search.toLowerCase()) > -1, 0);
+        assert.isTrue(filteredUsers[i].name.toLowerCase().indexOf(options.search.toLowerCase()) > -1, 0);
       }
       const sortedUsers = sortUsers(processed, options.orderBy, options.orderDirection);
       for (let i = 1; i < sortUsers.length; i++) {
