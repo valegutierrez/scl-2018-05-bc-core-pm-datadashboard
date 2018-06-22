@@ -68,6 +68,7 @@ window.computeUserStats = (users, progress, courses) => {
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
+  resumenCohort(users);
 };
 
 window.getCohorts = (cohorts) => { // Arma el contenido del desplegable de cohorts.
