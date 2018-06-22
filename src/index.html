@@ -11,10 +11,11 @@
 </head>
 <body>
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0" id="navbarPage">
-      <div id="titleContainer" class="col-md-9 offset-md-3">
-          <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
-      </div>
-        
+        <div id="titleContainer" class="col-md-9 offset-md-3">
+            <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
+            <h6 id="titleCohort">scl-2018-05-bc-core-am</h6>
+        </div>
+
     </nav>
     <div class="container-fluid">
         <div class="row">
@@ -31,18 +32,18 @@
                             <div class="input-group mb-3">
                                 <input id="userFinder" type="text" class="form-control" placeholder="NOMBRE APELLIDO" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                                    <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
                                 </div>
                         </li>
                     </ul>
                     <ul class="nav flex-columm">
                         <div class="dropdown show btn-group-vertical w-100">
                             <button class="btn btn-light btnlab dropdown-toggle text-uppercase w-100" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Cohorts
+                                Cohorts
                             </button>
                             <div id="cohortsList" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             </div>
-                          </div>
+                        </div>
                     </ul>
                     <ul class="nav flex-columm">
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -61,146 +62,162 @@
                             <button class="btn btn-primary btnlab text-uppercase active">
                                 Avance de Ejercicios
                             </button>
-                            <button class="btn btn-primary btnlab text-uppercase active">
-                                Progreso de Cursos
+                            <button id="btnResumenAlumna" class="btn btn-primary btnlab text-uppercase active">
+                                Resumen de Alumna
                             </button>
                         </div>
                     </ul>
                 </div>
             </nav>
         </div>
-      </div>
+    </div>
     <main class="col-md-9 ml-sm-auto col-lg-13">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-      <!--
-        <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
-      -->
-      </div>
-      <div id="bodyContent" class="container-fluid">
-      <!-- inicio Lectura en progreso-->
-        <div id="lectureProgressPage" class="row-margin">
-          <table id="lectureTable" class="table table-striped table-fixed">
-            <thead>
-              <tr class="yellowlab text-uppercase">
-                <th scope="col">Nombre</th>
-                <th class="fuschialab" scope="col">Avance Lecturas</th>
-              </tr>
-            </thead>
-            <tbody id="infoLectureTable">
-            </tbody>
-          </table>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <!--
+              <h1 id="titleDashboard" class="h2 text-uppercase">Dashboard</h1>
+            -->
         </div>
-      <!--fin lectura en progreso-->
-      <!--inicio informacion general-->
-        <div id="generalInformationPage">
-            <div id="generalInfoTable" class="container">
-                <div class="row row-margin">
-                    <table class="table"></table>
-                        <thead>
-                            <tr>
-                                <th scope="col" >
-                                    <select id="comboBoxOrder" onchange="orderChange()">
-                                        <option value="ASC" selected="selected">NOMBRE A-Z</option>
-                                        <option value="DESC" >NOMBRE Z-A</option>
-                                    </select>
-                                </th>
-                                <th scope="col">
-                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Todos" >TODOS</span>
-                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Optimo" >LV ÓPTIMO</span>
-                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="NoOptimo" >LV NO ÓPTIMO</span>
-                                    <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="sinAvanze" >SIN AVANCE</span>
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
+        <div id="bodyContent" class="container-fluid">
+            <!-- resumen alumna -->
+            <div id="resumenStudentPage" class="row-margin">
+                <table class="table table-striped table-fixed ">
+                    <thead>
+                        <tr class="yellowlab text-uppercase">
+                            <th scope="col">Nombre</th>
+                            <th class="fuschialab" scope="col">Prom Alumna</th>
+                            <th scope="col">Avance Lecturas</th>
+                            <th scope="col">Promedio Quizzes</th>
+                            <th scope="col">Avance Ejercicios</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resumenStudentBody"></tbody>
+                </table>
+            </div>
+            <!-- inicio Lectura en progreso-->
+            <div id="lectureProgressPage" class="row-margin">
+                <table id="lectureTable" class="table table-striped table-fixed">
+                    <thead>
+                        <tr class="yellowlab text-uppercase">
+                            <th scope="col">Nombre</th>
+                            <th class="fuschialab" scope="col">Avance Lecturas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="infoLectureTable"></tbody>
+                </table>
+            </div>
+            <!--fin lectura en progreso-->
+            <!--inicio informacion general-->
+            <div id="generalInformationPage">
+                <div id="generalInfoTable" class="container">
+                    <div class="row row-margin">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <select id="comboBoxOrder" onchange="orderNameChange()">
+                                            <option value="ASC" selected="selected">NOMBRE A-Z</option>
+                                            <option value="DESC">NOMBRE Z-A</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">
+                                        <select id="comboBoxOrderAvg" onchange="orderAvgChange()">
+                                            <option value="ASC" selected="selected">PROMEDIO ASC</option>
+                                            <option value="DESC">PROMEDIO DESC</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Todos">TODOS</span>
+                                        <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="Optimo">LV ÓPTIMO</span>
+                                        <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="NoOptimo">LV NO ÓPTIMO</span>
+                                        <span class="spaceContent"><input type="radio" name="optradio" onchange="categoryFilter();" value="sinAvanze">SIN AVANCE</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <table class="table table-striped table-fixed ">
+                            <thead>
+                                <tr class="yellowlab text-uppercase">
+                                    <th scope="col">Nombre</th>
+                                    <th class="fuschialab" scope="col">Prom Alumna</th>
+                                    <th scope="col">Avance Lecturas</th>
+                                    <th scope="col">Promedio Quizzes</th>
+                                    <th scope="col">Avance Ejercicios</th>
+                                </tr>
+                            </thead>
+                            <tbody id="generalInfBody"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                    <table  class="table table-striped table-fixed ">
+                <div class="row row-margin">
+                    <h6>RESUMEN COHORT :</h6>
+                    <table id="cohortInfoTable" class="table table-striped table-fixed infoTable">
                         <thead>
                             <tr class="yellowlab text-uppercase">
-                              <th scope="col">Nombre</th>
-                              <th class="fuschialab" scope="col">Prom Alumna</th>
-                              <th scope="col">Avance Lecturas</th>
-                              <th scope="col">Promedio Quizzes</th>
-                              <th scope="col">Avance Ejercicios</th>
+                                <th scope="col" class="fuschialab">RANGO</th>
+                                <th scope="col" class="yellowlab">QUIZZES</th>
+                                <th scope="col" class="yellowlab">LECTURAS</th>
+                                <th scope="col" class="yellowlab">EJERCICIOS</th>
                             </tr>
-                          </thead>
-                          <tbody id="generalInfBody">
-                          </tbody>
+                        </thead>
+                        <tbody>
+                            <tr id="progressRow">
+                                <td>SIN AVANCE</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="notOptimalRow">
+                                <td>LV NO ÓPTIMO</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="optimalRow">
+                                <td>LV ÓPTIMO</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr id="totalRow">
+                                <td>TOTAL ALUMNAS</td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-            </div>
-            <div class="row row-margin">
-                 <h6>RESUMEN COHORT :</h6>
-                  <table id="cohortInfoTable" class="table table-striped table-fixed infoTable">
-                    <thead>
-                      <tr class="yellowlab text-uppercase"></tr>
-                        <th scope="col" class="fuschialab">RANGO</th>
-                        <th scope="col" class="yellowlab">QUIZZES</th>
-                        <th scope="col" class="yellowlab">LECTURAS</th>
-                        <th scope="col" class="yellowlab">EJERCICIOS</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="progressRow">
-                            <td>SIN AVANCE</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr id="notOptimalRow">
-                            <td>LV NO ÓPTIMO</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr id="optimalRow">
-                            <td>LV ÓPTIMO</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr id="totalRow">
-                            <td>TOTAL ALUMNAS</td>
-                            <td colspan="3"></td>
-                        </tr>
-                    </tfoot>
-                  </table>                
-              </div>
-              <div class="row row-margin">
-                <h6>ALUMNAS DESTACADAS :</h6>
-              </div>
-              <br>
-              <div class="row">
+                <div class="row row-margin">
+                    <h6>ALUMNAS DESTACADAS : EN CONSTRUCCION!!</h6>
+                </div>
+                <br>
+                <div class="row">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-3">
-                                    <img width="200" src="img/medallaVacia.png">
+                                <img width="200" src="img/estrellita.png">
                             </div>
                             <div class="col-md-3">
-                                    <img width="200" src="img/medallaVacia.png">
+                                <img width="200" src="img/estrellita.png">
                             </div>
                             <div class="col-md-3">
-                                    <img width="200" src="img/medallaVacia.png">
+                                <img width="200" src="img/estrellita.png">
                             </div>
                             <div class="col-md-3">
-                                    <img width="200" src="img/medallaVacia.png">
+                                <img width="200" src="img/estrellita.png">
                             </div>
                         </div>
                     </div>
-                </div>                                                          
-              </div>
+                </div>
             </div>
         </div>
-      <!--fin informacion general-->
-      </div>
-      <br>
-      <br>
-      <br>
+        <!--fin informacion general-->
+        <br>
+        <br>
+        <br>
     </main>
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
