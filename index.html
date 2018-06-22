@@ -99,9 +99,9 @@
                         <thead>
                             <tr>
                             <th scope="col" >
-                                <select>
-                                    <option selected="selected">NOMBRE A-Z</option>
-                                    <option>NOMBRE Z-A</option>
+                                <select id="comboBoxOrder" onchange="orderChange()">
+                                    <option value="ASC" selected="selected">NOMBRE A-Z</option>
+                                    <option value="DESC" >NOMBRE Z-A</option>
                                 </select>
                             </th>
                             <th scope="col">
@@ -141,37 +141,63 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>SINAVANCE</td>
+                        <tr id="progressRow">
+                            <td>SIN AVANCE</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr>
+                        <tr id="notOptimalRow">
                             <td>LV NO ÓPTIMO</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr>
+                        <tr id="optimalRow">
                             <td>LV ÓPTIMO</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr id="totalRow">
+                            <td>TOTAL ALUMNAS</td>
+                            <td colspan="3"></td>
+                        </tr>
+                    </tfoot>
                   </table>                
               </div>
               <div class="row row-margin">
                 <h6>ALUMNAS DESTACADAS :</h6>
               </div>
+              <br>
               <div class="row">
-                  medallas
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                    <img width="200" src="img/medallaVacia.png">
+                            </div>
+                            <div class="col-md-3">
+                                    <img width="200" src="img/medallaVacia.png">
+                            </div>
+                            <div class="col-md-3">
+                                    <img width="200" src="img/medallaVacia.png">
+                            </div>
+                            <div class="col-md-3">
+                                    <img width="200" src="img/medallaVacia.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>                                                          
               </div>
             </div>
         </div>
       <!--fin informacion general-->
       </div>
+      <br>
+      <br>
+      <br>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
