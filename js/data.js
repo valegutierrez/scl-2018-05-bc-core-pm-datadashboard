@@ -58,7 +58,7 @@ window.computeUserStats = (users, progress, courses) => {
         percent: Math.round((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz)),
         scoreSum: Math.round(scoreSumQuiz),
         scoreAvg: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
-      },
+      }
     };
     element['stats'] = stats;// Agrega la nueva propiedad al Users
   });
@@ -85,55 +85,3 @@ window.filterUsers = (users, search) => { // Función de filtro de usuario
   });
 };
 
-window.sortUsers = (users, orderBy, orderDirection) => {
-  let sortedUsers = users;
-  if (orderBy === 'name') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.name.localeCompare(second.name));
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.name.localeCompare(second.name)).reverse();
-    }
-  };
-  if (orderBy === 'percent') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.stats.percent - second.stats.percent).reverse();
-    }
-  };
-  if (orderBy === 'exercisesPercent') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.stats.exercises.percent - second.stats.exercises.percent).reverse();
-    }
-  };
-  if (orderBy === 'quizzesPercent') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.stats.quizzes.percent - second.stats.quizzes.percent).reverse();
-    }
-  };
-  if (orderBy === 'quizzesScorePercent') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.stats.quizzes.scoreAvg - second.stats.quizzes.scoreAvg).reverse();
-    }
-  };
-  if (orderBy === 'readsPercent') {
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent).reverse();
-    }
-  };
-  return sortedUsers;
-};
