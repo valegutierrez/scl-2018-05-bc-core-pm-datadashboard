@@ -1,4 +1,4 @@
-window.computeUserStats = (users, progress, courses) => {
+window.computeUsersStats = (users, progress, courses) => {
   users.forEach(element => {
     let countPart = 0, totalRead = 0, totalQuiz = 0, totalExercise = 0, totalReadOk = 0, totalQuizOk = 0, totalExerciseOk = 0, totalScoreQuiz = 0, scoreSumQuiz = 0, scoreAvgQuiz = 0;
     let userProgress = progress[element.id]; // Obtiene progreso por usuario
@@ -59,18 +59,18 @@ window.computeUserStats = (users, progress, courses) => {
         percent: Math.round((totalQuizOk * 100) / (totalQuiz === 0 ? 1 : totalQuiz)),
         scoreSum: Math.round(scoreSumQuiz),
         scoreAvg: Math.round(scoreSumQuiz / (totalQuizOk === 0 ? 1 : totalQuizOk))
-      }
+      },
     };
     element['stats'] = stats;// Agrega la nueva propiedad al Users
   });
   console.log(users);
   console.log(progress);
   console.log(courses);
-  window.processCohortData();
   // Ejecuta las funciones que se despliegan en el html.
   lectureProgress(users);
   generalInformation(users);
   resumenCohort(users);
+  return users;
 };
 
 window.getCohorts = (cohorts) => { // Arma el contenido del desplegable de cohorts.
@@ -86,8 +86,9 @@ window.filterUsers = (users, search) => { // Función de filtro de usuario
     return studentFilter.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
   });
 };
+
 window.sortUsers = (users, orderBy, orderDirection) => {
-  let sorted = [];
+  let sortedUsers = users;
   if (orderBy === 'name') {
     if (orderDirection === 'ASC') {
       sorted = users.sort((first, second) => first.name.localeCompare(second.name));
@@ -136,22 +137,14 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       sorted = users.sort((first, second) => first.stats.reads.percent - second.stats.reads.percent).reverse();
     }
   };
-  return sorted;
+  return sortedUsers;
 };
+
 window.processCohortData = (options) => {
-  window.computeUserStats();
-  window.sortUsers();
-  window.filterUsers();
-  var options = {
-    cohort: cohort,
-    cohortData: {
-      users: users,
-      progress: progress
-    },
-    orderBy: orderBy,
-    orderDirection: orderDirection,
-    search: search,
-  };
-  console.log(options);
-  return options;
+  let computeUsers = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohortData.courses);
+  let sortedUsers = sortUsers(computeUsers, options.orderBy, options.orderDirection);
+  let filteredUsers = filterUsers(sortedUsers, options.search);
+  console.log('processCohortData result:');
+  console.log(filteredUsers);
+  return filteredUsers;
 };
