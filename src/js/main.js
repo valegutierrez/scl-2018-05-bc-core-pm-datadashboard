@@ -89,7 +89,6 @@ function generalInformation(users) {
 }
 btnResumenAlumna.addEventListener('click', () => {
   if (inpStudent.value !== '') {
-    resumenStudentBody(gUsers, inpStudent.value);
     // Armamos objeto options, con las propiedades solicitadas.
     const options = {
       cohort: gCohorts,
@@ -104,6 +103,7 @@ btnResumenAlumna.addEventListener('click', () => {
     };
     // Hacemos la llamada a la función processCohortData.
     processCohortData(options);
+    resumenStudentBody(gUsers, inpStudent.value);
   } else {
     resStdTable.innerHTML = '';
     let names = `<tr colspan="5"><td>Tiene que ingresar algún filtro para buscar alumnas</td></tr>`;
