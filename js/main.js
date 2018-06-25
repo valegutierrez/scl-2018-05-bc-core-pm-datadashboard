@@ -15,7 +15,7 @@ function getApiData(cohort) {
     fetch('https://api.laboratoria.la/cohorts/' + cohort + '/users'),
     fetch('https://api.laboratoria.la/cohorts/' + cohort + '/progress'),
     fetch('https://api.laboratoria.la/cohorts/' + cohort + '/courses'),
-    fetch('http://api.laboratoria.la/cohorts/')
+    fetch('https://api.laboratoria.la/cohorts/')
   ]).then((responses)=>{ // Se cumplen promesas
     return Promise.all(responses.map((response => response.json()))); 
   }).then((responseJsons)=>{ // Transforma respuestas en objetos Json
