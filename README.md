@@ -65,8 +65,7 @@ Se utiliza nueva paleta de colores y Nuevo Logotipo de Laboratoria.
 
 ## 3) Organización de tareas a Desarrollar
 
-[Trello](https://trello.com/b/hv3BOMJr/data-dashboard) 
-
+[Trello](https://trello.com/b/hv3BOMJr/data-dashboard)
 ...............................................................................
 
 # Data Dashboard

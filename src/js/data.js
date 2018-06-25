@@ -1,4 +1,4 @@
-window.computeUserStats = (users, progress, courses) => {
+window.computeUsersStats = (users, progress, courses) => {
   users.forEach(element => {
     let countPart = 0, totalRead = 0, totalQuiz = 0, totalExercise = 0, totalReadOk = 0, totalQuizOk = 0, totalExerciseOk = 0, totalScoreQuiz = 0, scoreSumQuiz = 0, scoreAvgQuiz = 0;
     let userProgress = progress[element.id]; // Obtiene progreso por usuario
@@ -70,6 +70,7 @@ window.computeUserStats = (users, progress, courses) => {
   lectureProgress(users);
   generalInformation(users);
   resumenCohort(users);
+  return users;
 };
 
 window.getCohorts = (cohorts) => { // Arma el contenido del desplegable de cohorts.
@@ -137,4 +138,13 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     }
   };
   return sortedUsers;
+};
+
+window.processCohortData = (options) => {
+  let computeUsers = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohortData.courses);
+  let sortedUsers = sortUsers(computeUsers, options.orderBy, options.orderDirection);
+  let filteredUsers = filterUsers(sortedUsers, options.search);
+  console.log('processCohortData result:');
+  console.log(filteredUsers);
+  return filteredUsers;
 };
