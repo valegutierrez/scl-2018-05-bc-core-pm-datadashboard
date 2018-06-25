@@ -8,6 +8,8 @@ Es por este motivo que se nos ha solicitado crear una interfaz donde puedan acce
 información vital para la toma de decisiones, donde podrán _ver_ y _usar_ la data de 
 progreso del LMS.
 
+Para acceder a la página, haz click [aquí.](https://valegutierrez.github.io/scl-2018-05-bc-core-pm-datadashboard/)
+
 ## 1) Definición del producto
 
 1. **Quiénes son los principales usarios de producto:**
