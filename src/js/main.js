@@ -89,7 +89,6 @@ function generalInformation(users) {
 }
 btnResumenAlumna.addEventListener('click', () => {
   if (inpStudent.value !== '') {
-    
     // Armamos objeto options, con las propiedades solicitadas.
     const options = {
       cohort: gCohorts,
@@ -273,5 +272,3 @@ function hideContent() {
 function cohortsSelectChange(cohort) {
   getApiData(cohort);
 }
-
-

@@ -185,15 +185,9 @@ describe('data', ()=>{
         assert.isObject(user.stats.quizzes);
         assert.isObject(user.stats.reads);
       });
-<<<<<<< HEAD
       const filterUsers = filterUsers(users, options.search);
       for (let i = 1; i < filterUsers.length; i++) {
         assert.isTrue(filterUsers[i].name.toLowerCase().indexOf(options.search.toLowerCase()) > -1, 0);
-=======
-      const filteredUsers = filterUsers(users, options.search);
-      for (let i = 1; i < filterUsers.length; i++) {
-        assert.isTrue(filteredUsers[i].name.toLowerCase().indexOf(options.search.toLowerCase()) > -1, 0);
->>>>>>> refs/remotes/origin/master
       }
       const sortedUsers = sortUsers(processed, options.orderBy, options.orderDirection);
       for (let i = 1; i < sortUsers.length; i++) {
